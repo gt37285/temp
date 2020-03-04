@@ -1,0 +1,242 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+
+
+$oscuro: #283035;
+$azul: #04506e;
+$detalle: #c7cacb;
+$texto: #555;
+
+.container{
+    display: grid;
+    height: 100%;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: repeat(2,1fr);
+    grid-gap: 1em;
+    padding: 1em;
+    grid-auto-flow: dense;
+
+}
+
+.video{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2 ;
+    padding-bottom: 1em;
+    display: flex;
+    height: 90vh;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-direction: column;
+}
+.video_frame{
+    width: 100%;
+    height: 100%;
+}
+
+hr{
+    border: none;
+    border-bottom: solid $detalle 1px;
+}
+
+.aside{
+    grid-column: 2 / 3;
+    grid-row: 1 / -1;
+    
+    .enlaces{
+        margin: 2em 1em;
+    }
+    .enlace{
+        font-size: 15px;
+    }
+}
+
+.enlaceTarea{
+    display: flex;
+    justify-content: space-between ;
+    align-items: center;
+    padding: .5em 0;
+
+    p{
+        margin: 0 1em;
+    }
+}
+
+
+.main{
+    display: none;
+}
+
+.active{
+    &::after{
+        width: 100%;
+    }
+}
+
+/** estilos para la seccion de la descripcion */
+
+.descripcion{
+    
+    margin-top: 3em;
+    
+
+    .left{
+        * { display: inline-block }
+
+        .fecha{
+            font-family: $fuente-raleway;
+            font-size: 12px;
+            margin-left: 1em;
+        }
+    }
+
+    .det{
+        margin-top: 2em;
+        font-size: 12px;
+        font-family: $fuente-raleway;
+    }
+
+    .desc{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nombre{
+        font-family: $fuente-nunito;
+        font-size: 22px;
+        color: $oscuro;
+        font-weight: 800;
+    }
+
+
+    .likes{
+        *{ display: inline-block }
+        color: $texto;
+        .icon{
+            margin-right: 1em;
+             &:hover{ color: $azul;}
+        }
+    }
+}
+
+/** esilos para la seccion del temario */
+
+
+.temario{
+    // margin: 1em 0;
+    background-color: #fff;
+    box-shadow: 0 2px 3px #ececec;
+    padding: 1em;
+    border-radius: 5px;
+  
+    .title{
+
+        padding: 1em 0;
+        font-family: $fuente-lato;
+        font-size: 17px;
+        position: relative;
+        font-weight: 500 ;
+    }
+
+    .tema{
+        // border: solid red 1px;
+        display: flex;
+        align-items: center;
+       
+
+        p{
+            font-family: $fuente-lato;
+            font-size: 15px;
+            color: $texto;
+        }
+        .icon{
+            margin-right: .5em;
+            font-size: 14px;
+            color: $texto;
+        }
+    }
+
+    .acordeon{
+        margin: 2em 0;
+    }
+
+    .videos{
+        text-decoration: none;
+        color: $texto;
+        font-size: 12px;
+        margin: 1em 0;
+        font-family: $fuente-raleway;
+    }
+
+    .contenido{
+
+        .clase{
+            margin-left: 1.3em;
+            *{ display: inline-block }
+            .icon{ margin-right: 1em;}
+            &:hover{
+                .icon,.videos{
+                    color: $azul;
+                }
+            }
+        }
+    }
+}
+
+.recursos{
+    margin-top: 2em;
+    background-color: #fff;
+    box-shadow: 0 2px 3px #ececec;
+    padding: 1em;
+    border-radius: 5px;
+
+    .videos{ font-weight: bold}
+
+    .fecha{
+        font-family: $fuente-raleway;
+        font-size: 12px;
+        color: $texto;
+        margin-left: 1em;
+    }
+    .contenido{
+
+        .icon{ color: $oscuro}
+    }
+}
+
+@media screen and ( max-width: 1500px ){
+    .container{
+        grid-template-columns: repeat(7,1fr);
+        grid-template-rows: repeat(2,1fr);
+        grid-gap: 2em;
+    }
+
+    .video{ 
+       grid-column: 1 / 6;
+       grid-row: 1 / 2 ;
+    }
+
+    .aside{
+        grid-column: 6 / -1;
+        grid-row: 1 / -1;
+    }
+}
+@media screen and ( max-width: 1500px ){
+    .container{
+        grid-template-columns: repeat(7,1fr);
+        grid-template-rows: repeat(2,1fr);
+        grid-gap: 2em;
+    }
+
+    .video{ 
+       grid-column: 1 / -1;
+       grid-row: 1 / 2 ;
+    }
+
+    .aside{
+        
+        grid-column: 1 / -1;
+        grid-row: 2 / -1;
+    }
+}

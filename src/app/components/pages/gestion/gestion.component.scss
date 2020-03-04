@@ -1,0 +1,487 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+$icon-color: #a6b7bf;
+$detalles: #a3a7ac;
+$detalle: #a3a7ac;
+$texto: #7c7c7c;
+$fondo: #456c9e;
+$delete: #7c1e1e;
+$alert: #a13153;
+
+$tomate: #f15d22;
+$azul : #2650a0;
+
+.container {
+  width: 100%;
+}
+
+.container-user {
+  width: 100%;
+  margin: 2em 0;
+  display: grid;
+  grid-gap: 2em;
+  grid-template-columns: repeat(5,1fr);
+  grid-template-rows: auto ;
+  grid-auto-flow: dense;
+
+}
+
+.search {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px #e7e6e6;
+  padding: 2em;
+}
+
+.container-caja {
+  position: relative;
+  padding: 0.7em 0;
+  border-bottom: solid $icon-color 1px;
+
+  .caja {
+    padding: 7px 7px 7px 35px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-family: $fuente-raleway;
+    font-size: 17px;
+    color: $detalles;
+
+    &::placeholder {
+      font-family: $fuente-raleway;
+      font-size: 17px;
+      color: $detalles;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: $fondo;
+    height: 1px;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:focus-within::after {
+    width: 100%;
+  }
+
+  .icon {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    color: $icon-color;
+  }
+}
+
+.container-spinner {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background-color: #0000003d;
+}
+
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px #e7e6e6;
+  padding: 2em;
+
+  .registrados {
+    font-family: $fuente-raleway;
+    font-size: 15px;
+    font-weight: 400;
+    color: $fondo;
+  }
+  span {
+    font-style: oblique;
+  }
+}
+
+.opciones-demo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .paginacion {
+    * {
+      display: inline-block;
+      margin-left: 1em;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  margin-top: 3em;
+  border: none;
+  border-collapse: collapse;
+
+  .img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
+    border: solid $detalles 1px;
+    border-radius: 50%;
+  }
+
+  th {
+    font-size: $fuente-nunito;
+    font-size: 15px;
+    text-align: center;
+    color: $detalles;
+    font-weight: 500;
+    padding: 1.5em 0;
+  }
+
+  td {
+    font-family: $fuente-raleway;
+    font-size: 14px;
+    text-align: center;
+    padding: 1em;
+    color: $texto;
+  }
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.icon-edit {
+  color: $fondo;
+  margin-right: 0.5em;
+}
+
+.icon-desc {
+  color: #c0410f;
+  margin-right: 0.5em;
+}
+
+.icon-trash {
+  color: $delete;
+}
+
+.icon-alert {
+  margin-right: 0.5em;
+  color: $alert;
+}
+.iconadd {
+  color: $fondo;
+}
+
+.icon-pag {
+  color: $fondo;
+}
+
+.icon-active {
+  color: #858585;
+  margin-right: 0.5em;
+}
+
+
+
+
+.container-table,.container-modulo {
+  overflow: hidden;
+  width: 100%;
+}
+
+
+.registrarCurso{
+   grid-column: 1/ 3;
+  grid-row: 1/2;
+  height: 600px;
+}
+
+.container-table{
+  grid-column: 3/-1;
+  grid-row: 1/-1;
+  // height: 534px !important;
+}
+
+
+.container-modulo{
+  grid-column: 1/4;
+  grid-row: 1/-1;
+   height: 600px !important;
+}
+
+.container-moduloz{
+  grid-column: 1/4;
+  grid-row: 1/-1;
+}
+
+
+.registraModulo{
+  grid-column: 4/-1;
+  //  grid-row: 2/3;
+}
+
+.registraClase{
+  grid-column: 1/ 3;
+  grid-row: 1/2;
+  height: 750px;
+}
+
+.container-recurso{
+   grid-column: 1/-1;
+  grid-row: 1/-1;
+}
+
+.input-select{
+  *{
+    width: 100%;
+  }
+}
+
+
+
+.registrarCurso,.registraModulo,.registraClase,.registraRecurso{
+  width: 100%;
+  .title{
+    font-family: $fuente-raleway;
+    font-size: 15px;
+    font-weight: 400;
+    color: $fondo;
+  }
+
+  .input{
+    margin-top: 1.5em;
+  }
+}
+
+
+
+
+.textarea{
+  width: 100%;
+  resize: none;
+}
+
+
+.noencontrado,.btn-submitx,.btn-cancelx,.btn-submit {
+  width: 100%;
+  padding: 2em 1em;
+  font-family: $fuente-raleway;
+  font-size: 13px;
+  text-align: center;
+  background-color: #384b79;
+  border-radius: 5px;
+  color: #fff;
+  margin-top: 4em;
+}
+
+.selectedModulo{
+  margin-right: 2em !important;
+}
+
+
+/** estilos para el modal de registro*/
+
+$title: #3e434b;
+$subtitle: #99abb4;
+/**colores*/
+$primario: #456c9e;
+$secundario: #a5b1b8;
+
+.container-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #00000038;
+  z-index: 20;
+}
+
+.modal {
+  display: block;
+  padding: 2em;
+  background-color: #fff;
+  box-shadow: 0 2px 3px #dfdbdb;
+  border-radius: 5px;
+  width: 700px;
+  position: relative;
+
+  .title {
+    font-family: $fuente-raleway;
+    font-size: 17px;
+    color: $title;
+    margin-bottom: 0.5em;
+  }
+
+  .subtitle {
+    font-family: $fuente-raleway;
+    font-size: 13px;
+    color: $subtitle;
+    margin-bottom: 2em;
+  }
+}
+
+.card-div {
+  display: block;
+}
+
+hr {
+  border: none;
+  width: 100%;
+  border-bottom: solid $detalle 1px;
+  margin: 2em 0;
+}
+
+.icon-times {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  color: #7a2c2c;
+}
+
+.hiddenModal {
+  display: none;
+}
+
+/**estilos del formulario de registro*/
+
+.formulario {
+  display: block;
+}
+
+.container-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  // border: solid blue 1px;
+}
+
+.personal,
+.seguridad {
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  margin: 0.5em 0;
+
+  label {
+    font-family: $fuente-raleway;
+    font-size: 13px;
+    color: $subtitle;
+  }
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  .container-caja {
+    position: relative;
+    width: 100%;
+    margin: 2em 0;
+    border-bottom: solid $detalle 1px;
+
+    .icon {
+      position: absolute;
+      top: 30%;
+      left: 5px;
+      color: $title;
+    }
+
+    .caja {
+      width: 100%;
+      padding: 7px 7px 7px 35px;
+      outline: none;
+      border: none;
+      color: $subtitle;
+      font-size: 13px;
+
+      &::placeholder {
+        color: $secundario;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .especiald {
+    width: 100%;
+    margin: 0.7em 0;
+  }
+}
+
+.botones{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.btn-submitx,.btn-cancelx {
+  width: 48%;
+  padding: 12px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+}
+
+.btn-cancelx{
+  background-color: $tomate;
+}
+
+
+.incx{
+    width: 150px !important;
+    display: inline-block;
+}
+
+.padre-inzx{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inzx{
+    width: 46% ;
+}
+
+@media screen and (max-width: 1015px) {
+  .container-user{
+    display: block;
+   //border: blue solid 10px;
+  }
+}

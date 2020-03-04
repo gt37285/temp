@@ -1,0 +1,88 @@
+<div class="container fadeIn">
+  <app-breadcrumbs></app-breadcrumbs>
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div class="container-cards">
+    <!-- {{ usuarios | json }} -->
+
+    <div class="card card-user">
+      <p class="title">Usuarios</p>
+      <hr />
+
+      <table class="contenido">
+        <div class="noencontrado" *ngIf="usuarios.length <= 0">
+          no hay registros
+        </div>
+
+        <div *ngIf="usuarios.length > 0">
+          <tbody *ngFor="let usuario of usuarios">
+            <tr class="item">
+              <td><img [src]="usuario.img | imagen" alt="" /></td>
+              <td>
+                <p class="nombre">{{ usuario.nombre }}</p>
+              </td>
+              <td>
+                <p class="nombre">{{ usuario.email }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+    <!-- fin  -->
+
+    <div class="card">
+      <p class="title">cursos</p>
+      <hr />
+
+      <!-- {{ cursos | json }} -->
+      <table class="contenido">
+        <div class="noencontrado" *ngIf="cursos.length <= 0">
+          no hay registros
+        </div>
+
+        <div *ngIf="cursos.length > 0">
+          <tbody *ngFor="let curso of cursos">
+            <tr class="item cursor" (click)="iracursos(curso._id)">
+              <td><img [src]="curso.img | imagen: 'cursos'" alt="" /></td>
+              <td>
+                <p class="nombre">{{ curso.nombre }}</p>
+              </td>
+              <td>
+                <p class="nombre">
+                  {{ curso.fecha | date: "ss - dd-MMM-yyyy" }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+    <!-- fin  -->
+
+    <div class="card">
+      <p class="title">Instituciones</p>
+      <hr />
+
+      <!-- {{ cursos | json }} -->
+      <table class="contenido">
+        <div class="noencontrado" *ngIf="instituciones.length <= 0">
+          no hay registros
+        </div>
+
+        <div *ngIf="instituciones.length > 0">
+          <tbody *ngFor="let institucion of instituciones">
+            <tr class="item" >
+              <td><img [src]="institucion.img | imagen: 'institucion'" alt="" /></td>
+              <td>
+                <p class="nombre">{{ institucion.nombre | capitalizar }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+    </div>
+    <!-- fin  -->
+
+  </div>
+</div>

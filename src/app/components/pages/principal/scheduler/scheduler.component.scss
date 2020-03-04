@@ -1,0 +1,224 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+
+.container-bradcr {
+  width: 100%;
+}
+
+.container-calendar {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  width: 100%;
+  box-shadow: 0 2px 3px #dfdbdb;
+  padding: 1.5em;
+}
+
+.calendar {
+  width: 100%;
+  margin: 5em 0;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.459);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  display: none;
+  overflow: auto;
+
+  .actividad {
+    width: 450px;
+    height: 870px;
+    background-color: #fff;
+    border: solid #ccc 1px;
+    border-radius: 10px;
+    position: relative;
+    margin: 6em auto;
+    .icon-times {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  .curso {
+    margin-top: 3em;
+
+    .img_curso {
+      display: block;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 2em auto;
+    }
+    .nombre {
+      font-family: $fuente-nunito;
+      font-size: 1.3em;
+      margin-top: 2em;
+      text-align: center;
+    }
+  }
+
+  .contenido {
+    font-family: $fuente-raleway;
+    padding: 0.7em 2em;
+    font-size: 14px;
+    .title {
+      font-weight: bold;
+      margin-right: 1em;
+    }
+  }
+
+  .cont-actividad {
+    .icon {
+      color: red;
+    }
+  }
+
+  .icon {
+    width: 30px;
+    color: #2b4b63;
+    margin-right: 1em;
+    padding: 0.5em;
+  }
+}
+
+.show-modal {
+  display: flex;
+}
+
+.icon_activo {
+  color: #217035 !important;
+}
+
+.flex-cont {
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+.padre {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.padre-desc {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.desc {
+  width: 60%;
+}
+
+.tema {
+  margin-top: 3em;
+}
+
+.descripcion {
+  width: 54%;
+  word-wrap: break-word;
+  line-height: 1.6;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  border-top: solid #ccc 1px;
+  margin: 2em auto;
+}
+
+.caja {
+  font-family: $fuente-raleway;
+  width: 100%;
+  padding: 8px;
+  margin: 1em 0;
+  background-color: #4b5a6e;
+  color: #fff;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  width: 55%;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+  margin: 1em auto;
+}
+
+.iborrainputfile {
+  margin-right: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  .container-bradcr {
+    width: 100%;
+    padding: 0 0;
+  }
+
+  .calendar {
+    margin: 2em 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .actividad {
+    width: 100%;
+    height: 100% !important;
+    border-radius: unset !important;
+    margin: 3em auto !important;
+  }
+
+  .curso {
+    margin-top: 2em;
+
+    .img_curso {
+      display: block;
+      width: 150px !important;
+      height: 150px !important;
+    }
+  }
+}
+

@@ -1,0 +1,153 @@
+<div class="container">
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <section class="search">
+    <div class="container-caja">
+      <i class="fas fa-search icon"></i>
+      <input #input type="text" class="caja" (keyup)="buscar(input.value)" placeholder="Buscar Instituciones" />
+    </div>
+  </section>
+
+  <section class="agregar-inst">
+    <div class="container-caja-a">
+      <i class="fas fa-city"></i>
+      <button class="btn btn-white" (click)="show(agregar1,modal1)">Agregar institucion</button>
+    </div>
+  </section>
+
+  <main class="container-inst">
+
+    <div class="container-agregar" #agregar1>
+      <section class="agregar " #modal1>
+        <article class="card card-dir">
+          <div class="icono-cerrar">
+            <i (click)="ocularModal()" class="fas fa-times"></i>
+          </div>
+          <p class="title">Direcciones</p>
+          <p class="subtitle">Ser bachiller</p>
+
+          <form class="contenido" #form_agregar="ngForm" (ngSubmit)="agregar(form_agregar)">
+            <div class="container-formulario">
+              <div class="input dir-div">
+                <label for="ciudad">Nombre</label>
+                <div class="container-caja" id="ciudad">
+                  <i class="fas fa-university icon"></i>
+                  <input type="text" class="caja" placeholder="Nombre" name="nombre" autocomplete="off" ngModel
+                    required />
+                </div>
+              </div>
+
+              <div class="input dir-div">
+                <label for="mainstreet">Calle principal</label>
+                <div class="container-caja" id="mainstreet">
+                  <i class="fas fa-road icon"></i>
+                  <input type="text" class="caja" placeholder="Calle principal" autocomplete="off"
+                    name="dir_calle_principal" ngModel />
+                </div>
+              </div>
+
+              <div class="input dir-div dir-div-house">
+                <label for="secondstreet">Calle secundaria</label>
+                <div class="container-caja" id="secondstreet">
+                  <i class="fas fa-road icon"></i>
+                  <input type="text" class="caja" placeholder="Calle secundaria" autocomplete="off"
+                    name="dir_calle_secundaria" ngModel />
+                </div>
+              </div>
+
+              <div class="input dir-div dir-div-house">
+                <label for="numHouse">Numero</label>
+                <div class="container-caja" id="numHouse">
+                  <i class="fas fa-home icon"></i>
+                  <input type="text" class="caja" placeholder="Numero" autocomplete="off" name="dir_num" ngModel />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" mat-stroked-button class="submit">
+              Registrar
+            </button>
+          </form>
+          <button (click)="ocularModal()" mat-stroked-button class="cancelar" #ocultarBoton>
+            Cancelar
+          </button>
+        </article>
+      </section>
+    </div>
+    <section class="listar">
+      <article class="container-table animated fadeIn">
+        <div class="card">
+          <div class="opciones-demo">
+            <p class="registrados">
+              Instituciones ( <span>{{ total }}</span> )
+            </p>
+            <div class="paginacion">
+              <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesde(-8)"></i>
+              <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesde(8)"></i>
+            </div>
+          </div>
+          <div class="listas-inst" style="overflow-x: auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>calle_principal</th>
+                  <th>calle_secundaria</th>
+                  <th>numero</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody class="animated fadeIn">
+
+
+                <tr *ngFor="let institucion of instituciones">
+
+                  <td style="text-align: center;" *ngIf="!institucion.admin">
+                    <img class="img" [src]="institucion.img | imagen:'institucion'" alt=""
+                      (click)="mostrarModal(institucion)" />
+                  </td>
+
+                  <td *ngIf="!institucion.admin">
+                    <div class="containercaja">
+                      <input type="text" class="caja" [value]="institucion.nombre" name="nombre"
+                        [(ngModel)]="institucion.nombre">
+                    </div>
+                  </td>
+
+                  <td *ngIf="!institucion.admin">
+                    <div class="containercaja">
+                      <input type="text" class="caja" [value]="institucion.dir_calle_principal" name="calle_principal"
+                        [(ngModel)]="institucion.dir_calle_principal">
+                    </div>
+                  </td>
+
+                  <td *ngIf="!institucion.admin">
+                    <div class="containercaja">
+                      <input type="text" class="caja" [value]="institucion.dir_calle_secundaria" name="calle_secundaria"
+                        [(ngModel)]="institucion.dir_calle_secundaria">
+                    </div>
+                  </td>
+
+                  <td *ngIf="!institucion.admin">
+                    <div class="containercaja">
+                      <input type="text" class="caja" [value]="institucion.dir_num" name="numero"
+                        [(ngModel)]="institucion.dir_num">
+                    </div>
+                  </td>
+                  <td style="text-align: center;" *ngIf="!institucion.admin">
+                    <i class="fas fa-save icon icon-edit" (click)="actualizar(institucion)"></i>
+                    <i class="fas fa-trash icon icon-trash" (click)="eliminar(institucion)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </section>
+
+  </main>
+</div>

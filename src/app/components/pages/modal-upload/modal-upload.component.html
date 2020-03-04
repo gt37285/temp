@@ -1,0 +1,39 @@
+<div class="container-modal">
+  <div class="modal" #modal [ngClass]="{ hiddenModal: _modalService.showModal.mostrar }">
+    <section class="card card-img">
+      <p class="title">Selecciona la imagen</p>
+      <p class="subtitle">Ser bachiller</p>
+      <i class="fas fa-times icon icon-times" (click)="cerrarModal(modal)"></i>
+
+      <hr />
+
+      <div class="preview">
+        <img [src]="_modalService.showModal.data?.img | imagen" alt="" *ngIf="!imagenTemp" />
+        <img [src]="imagenTemp" alt="" *ngIf="imagenTemp" />
+      </div>
+
+      <hr />
+
+      <form action="">
+        <div class="botones">
+          <button type="button" mat-stroked-button class="submit sub-img btn-file">
+            <div class="file-div">
+              <input type="file" id="file" (change)="seleccionimg($event.target.files[0])" />
+              <label for="file">Selecciona una imagen</label>
+            </div>
+          </button>
+
+          <button type="button" mat-stroked-button (click)="
+              cargarImg(
+                _modalService.showModal.data,
+                _modalService.showModal.tipo,
+                modal
+              )
+            " class="submit sub-img">
+            Cargar Imagen
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

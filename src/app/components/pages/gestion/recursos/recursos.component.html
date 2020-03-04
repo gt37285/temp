@@ -1,0 +1,106 @@
+<div class="container">
+
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <div class="container-recur">
+
+        <!-- seccion para los recursos  -->
+        
+        <div class="container-user">
+        
+            <section class="container-recurso card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Recursos ( <span>{{ totalRecursos }}</span> )
+                        </p>
+                        <div class="paginacion">
+                            <div class="regestro">
+        
+                                <div class="padre-inzx">
+                            
+                                <div class="input input-select inzx">
+                                    <mat-form-field>
+                                        <mat-label>Curso</mat-label>
+                                        <mat-select [(value)]="selectedCurso">
+                            
+                                            <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos"
+                                                (click)="cargarModulos()">
+                                                {{curso.nombre}}
+                                            </mat-option>
+                            
+                                        </mat-select>
+                                    </mat-form-field>
+                                    </div>
+                                    <div class="input input-select inzx">
+                                        <mat-form-field>
+                                            <mat-label>Modulo</mat-label>
+                                            <mat-select [(value)]="selectedMdl">
+                                
+                                                <mat-option selected="true" [value]="modulo._id" *ngFor="let modulo of modulos">
+                                                    {{modulo.nombre}}
+                                                </mat-option>
+                                
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class=" file">
+                                        <input type="file" id="file" placeholder="Archivo" class="inputfile" name="archivo" (change)="seleccionArchivo($event.target.files[0])">
+                                        <label for="file"><i class="fas fa-file-upload icon"></i> <span>Seleccionar Archivo</span></label>
+                                    </div>
+    
+                                    <button type="button" mat-stroked-button class="fileupload" (click)="cargarArchivo()">Cargar</button>
+                                    
+                                </div>
+        
+                            </div>
+                            <i class="fas fa-search icon" (click)="cargarRecursos()"></i>
+                            <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesdeRecPrev(-8)"></i>
+                            <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesdeRecNext(8)"></i>
+                        </div>
+                    </div>
+        
+                    <div class="noencontrado" *ngIf="totalRecursos <= 0">
+                        no se encontraron clases para el modulo seleccionado
+                    </div>
+        
+        
+                    <div style="overflow-x: auto;" *ngIf="totalRecursos > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Identificador</th>
+                                    <th>Tamano</th>
+                                    <th>Extension</th>
+                                    <th>Fecha</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="animated fadeIn">
+                                <tr *ngFor="let recurso of recursos | slice:desdePrevRec:desdeNextRec">
+                                    <td> {{ recurso.tema }} </td>
+                                    <td> {{ recurso.nombre | capitalizar}} </td>
+                                    <td> {{ recurso.tamano }} </td>
+                                    <td> {{ recurso.extension }} </td>
+                                    <td> {{ recurso.fecha | date }}</td>
+        
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-trash icon icon-trash" (click)="eliminarRecurso(recurso)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        
+        
+        </div>
+
+    </div>
+</div>
+
+

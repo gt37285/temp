@@ -1,0 +1,234 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.container {
+  background: linear-gradient(
+      204deg,
+      #ffffff88 0%,
+      #9194c752 62%,
+      #1e37865b 100%
+    ),
+    url("../../../../assets/img/recursos/estudio_1.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    background: linear-gradient(
+      204deg,
+      #ffffff88 0%,
+      #9194c752 62%,
+      #1e37865b 100%
+    );
+  }
+}
+
+.container {
+  padding: 9em 2em;
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.centrar {
+  text-align: center;
+}
+
+.logo,
+.logo-web {
+  font-family: $fuente-lato;
+  width: 250px;
+  margin: 1em 0;
+  color: #534646;
+
+  .title {
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    float: right;
+    font-family: $fuente-raleway;
+  }
+}
+
+.logo-web {
+  display: none;
+}
+
+.contenedor-site {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 4em;
+  width: 100%;
+}
+
+.boton {
+  width: 100%;
+  margin: 3em auto;
+  padding: 10px 7px;
+  background-color: #3e4075;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.8em;
+  cursor: pointer !important;
+}
+
+.container-caja {
+  width: 100%;
+  position: relative;
+  padding: 0.5em 0;
+  border-bottom: solid 1px #333232;
+  margin: 1em 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 1px;
+    width: 0;
+    transition: all 0.5s ease-in-out;
+    background-color: #366388;
+  }
+
+  &:focus-within {
+    .caja,
+    .icon,
+    .ico_eye {
+      color: #366388;
+    }
+    &::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  .caja {
+    padding: 7px 7px 7px 38px;
+    width: inherit;
+    outline: none;
+    -moz-outline: none;
+    border: none;
+    color: #366388;
+    background-color: transparent;
+    font-size: 11px;
+    &::placeholder {
+      color: #534646;
+    }
+  }
+  .ico-eye {
+    position: absolute;
+    right: 7px !important;
+    bottom: 15px;
+    font-size: 1.1em;
+    color: #555;
+  }
+
+  .icon {
+    position: absolute;
+    left: 7px;
+    bottom: 15px;
+    font-size: 1.1em;
+    color: #534646;
+  }
+}
+
+.mensaje {
+  font-size: 11px;
+  font-family: $fuente-raleway;
+  color: #366388;
+  width: 100%;
+  text-align: start;
+  font-weight: 200;
+  margin-bottom: 3em;
+}
+
+.validacion {
+  width: 100%;
+  font-family: $fuente-raleway;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 1em 0;
+
+  .credenciales {
+    color: #366388;
+    margin: 1em 0;
+    text-align: left;
+  }
+
+  .container-enlace {
+    text-align: center;
+    padding: 2em 0;
+    color: #534646;
+  }
+
+  .container-signup {
+    text-align: right;
+    padding: 2em 0;
+  }
+  .enlace {
+    color: #534646;
+    text-decoration: none;
+  }
+
+  .enlace-sign {
+    font-weight: bold;
+  }
+}
+
+@media screen and(min-width: 600px) {
+  .container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .main {
+      background-color: #fff;
+      width: 400px;
+      border-radius: 5px;
+      padding: 3em;
+      margin: 0 3em;
+      opacity: 0.8;
+    }
+  }
+
+  .container-caja {
+    &::after {
+      content: "";
+      background-color: #366388;
+    }
+
+    &:focus-within {
+      .caja,
+      .icon,
+      .ico_eye {
+        color: #366388;
+      }
+    }
+
+    .caja {
+      color: #555;
+    }
+  }
+
+  .logo {
+    display: none;
+  }
+  .logo-web {
+    display: block;
+  }
+}

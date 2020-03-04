@@ -1,0 +1,358 @@
+/**fuentes*/
+
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+/***seccion de inicio */
+
+.img_inicio {
+  height: 100vh;
+  background: linear-gradient(204deg, #ffffff88 0%, #9194c752 62%, #1e37865b 100%);
+
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .frase {
+    width: 450px;
+    color: #383c52;
+
+    .title {
+      font-family: $fuente-lato;
+      font-size: 33px;
+      margin-bottom: 1em;
+      font-weight: bold;
+    }
+
+    .sub_title {
+      font-family: $fuente-raleway;
+      font-size: 13px;
+      margin-bottom: 2em;
+    }
+
+    .boton {
+      width: 180px;
+      padding: 6px;
+      font-family: $fuente-raleway;
+      font-size: 15px;
+      z-index: 10;
+    }
+  }
+  .img_rompe {
+    display: block;
+    width: 450px;
+    z-index: 10;
+  }
+}
+
+.svg_landing_1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/** seccion de acreditacion*/
+
+.acreditacion {
+  width: 100%;
+  padding: 10em 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .img {
+    display: block;
+    width: 500px;
+    object-fit: cover;
+    margin: 3em;
+  }
+}
+
+/**seccion para la informacion de servicios*/
+
+.servicios {
+  width: 100%;
+
+  padding: 20em 0;
+  clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
+  background-color: #eee;
+  .descripcion {
+    text-align: center;
+    .desc {
+      font-style: italic;
+      text-align: inherit;
+      padding: 0 2em;
+    }
+  }
+}
+
+/** titulos,subtitulos y descripcion*/
+
+.title {
+  font-family: $fuente-lato;
+  font-size: 28px;
+  font-weight: bold;
+  padding-bottom: 2em;
+}
+
+.desc {
+  font-family: $fuente-raleway;
+  font-size: 14px;
+  padding: 1em 0;
+  text-align: justify;
+}
+
+.tarjetas_comp {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 3em 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 350px;
+  margin: 4em 0;
+  text-align: center;
+  padding: 1em;
+
+  &_icon {
+    padding: 0.2em 0;
+    color: #3e4075;
+    font-size: 6em;
+    text-align: center;
+  }
+
+  .title {
+    padding: 1em 0;
+    font-weight: unset;
+    font-size: 20px;
+  }
+
+  .subtitle {
+    text-align: justify;
+  }
+}
+
+/**seccion para la informacion de la utn*/
+
+.informacion {
+  height: 150vh;
+  position: relative;
+  clip-path: polygon(100% 10%, 0 0, 0 100%, 100% 80%);
+
+  .img {
+    width: 100%;
+    display: block;
+    height: inherit;
+    background-image: url("../../../../assets/img/recursos/universidad.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.6) contrast(0.6);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .title,
+  .desc {
+    color: #dddfe6;
+    z-index: 500;
+    text-align: center;
+  }
+
+  .contenido {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 60%;
+    margin: auto;
+  }
+}
+
+/**seccion para la experiencia*/
+
+.experiencia {
+  .img {
+    order: 1;
+  }
+}
+
+/**seccion para el blog*/
+
+.blog {
+  background-color: unset;
+  .img {
+    display: block;
+    object-fit: cover;
+    width: inherit;
+  }
+
+  .card {
+    padding: unset;
+  }
+}
+
+.btn {
+  padding: 6px;
+  font-size: 13px;
+  font-family: $fuente-raleway;
+  background-color: #2a3c50;
+  color: #fff;
+  width: 100%;
+  margin-top: 4em;
+}
+
+/**seccion de contenido compartido*/
+
+.contenido_comp {
+  width: 500px;
+  margin: 3em;
+}
+
+@media screen and(max-width: 1400px) {
+  .img_inicio {
+    .frase {
+      .title {
+        font-size: 24px;
+      }
+
+      .sub_title {
+        font-size: 12px;
+      }
+
+      .boton {
+        width: 180px;
+        font-size: 13px;
+      }
+    }
+    .img_rompe {
+      width: 350px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .img_inicio {
+    .frase {
+      width: 320px;
+    }
+  }
+
+  .acreditacion {
+    .img {
+      width: 450px;
+      order: 1;
+    }
+  }
+
+  .servicios {
+    padding: 10em 0;
+    clip-path: inset(0 0 0 0);
+  }
+
+  .informacion {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .contenido_comp {
+    width: 450px;
+    text-align: center;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .desc {
+    font-size: 12px;
+  }
+
+  .card {
+    .title {
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .img_inicio {
+    height: 140vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+
+    .frase {
+      width: 450px;
+
+      .title {
+        padding-top: 4em;
+      }
+      .sub_title {
+        padding: 2em 0;
+      }
+    }
+  }
+
+  .acreditacion {
+    .img {
+      width: 450px;
+      order: 1;
+    }
+  }
+
+  .contenido_comp {
+    width: 450px;
+    text-align: center;
+    .title {
+      font-size: 24px;
+    }
+    .desc {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .img_inicio {
+    .frase {
+      width: 350px;
+    }
+    .img_rompe {
+      width: 300px;
+    }
+  }
+
+  .acreditacion {
+    .img {
+      width: 300px;
+    }
+  }
+
+  .contenido_comp {
+    width: 350px;
+    .title {
+      font-size: 20px;
+    }
+    .desc {
+      font-size: 11px;
+    }
+  }
+
+  .card {
+    .title {
+      font-size: 15px;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.containercaja{
+    width: 100%;
+    border:none;
+    outline: none;
+    position: relative;
+
+    &::after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: #2a4174;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transition: all .3s ease-in-out;
+    }
+
+    &:focus-within::after{
+        width: 90%;
+        left: 0;
+    }
+
+    .caja{
+        width: 100%;
+        font-family: $fuente-raleway;
+        font-size: 12px;
+        text-align: center;
+        border: none;
+        outline: none;
+        padding-bottom: 4px;
+    }   
+}
+
+.required{
+    margin-left: 1em;
+    // font-family: $fuente-raleway;
+    color: #993636;
+}
+
+.labelc{
+    color: #993636 !important;
+}
+
+.icon-desc {
+  color: #c0410f;
+  margin-right: 0.5em;
+}

@@ -1,0 +1,149 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+$icon-color: #a6b7bf;
+$detalles: #383d44;
+$texto: #a6b7bf;
+$fondo: #232932;
+
+/**colores*/
+$primario: #456c9e;
+
+.container {
+  height: calc(100vh - 60px);
+  width: 270px;
+  background-color: $fondo;
+  position: fixed;
+  bottom: 0;
+  transform: translateX(-100%);
+  transition: transform 0.1s ease-in;
+  overflow: auto;
+  z-index: 10;
+}
+
+.show-sidebar {
+  transform: translateX(0);
+}
+
+/** inicio del sidebar */
+
+.menu,
+.menu_child {
+  list-style: none;
+
+  .item {
+    margin: 1em;
+  }
+}
+
+.item-mod {
+  margin-top: 2em;
+}
+
+/**seccion para el user-profile*/
+
+.user-profile {
+  width: 100%;
+  // margin: 2em 0;
+  border-bottom: solid $detalles 1px;
+
+  .profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    .img {
+      color: #dbdcdd;
+
+      img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1em;
+        font-family: $fuente-nunito;
+        font-size: 17px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.user-mod {
+  border: none;
+  margin: none;
+}
+
+.prof {
+  margin: 2em 0;
+}
+
+.profile-mod {
+  margin-bottom: 1em;
+}
+
+.titulo-mod {
+  font-family: $fuente-raleway !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  color: $icon-color;
+}
+
+.icon {
+  padding-right: 1em;
+}
+
+.icon-mod {
+  margin-left: 1em;
+  color: $icon-color;
+}
+
+.icon-chevron {
+  color: #56606f;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.enlace,
+.enlace_child {
+  display: block;
+  text-decoration: none;
+  color: #555f6d;
+  padding: 7px;
+  width: 100%;
+  font-family: $fuente-raleway;
+  font-size: 17px;
+
+  &:hover {
+    color: $texto;
+  }
+}
+
+.enlace_child {
+  font-size: 14px;
+  margin: 1em 0;
+}
+
+.menu_child {
+  margin-left: 2em;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.active_menu_child {
+  transform: rotate(-270deg);
+}
+
+.active {
+  color: $primario;
+}

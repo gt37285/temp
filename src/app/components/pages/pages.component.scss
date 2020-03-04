@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+}
+
+.navegacion {
+  height: 60px;
+}
+
+.main {
+  display: flex;
+}
+
+.sidenavbar {
+  height: calc(100vh - 60px);
+  width: 0;
+  transition: width 0.1s ease-in;
+}
+
+.router {
+  padding: 2em;
+  width: 100%;
+  background-color: #f4f6f9;
+}
+
+.activerouter {
+  margin-left: 270px;
+}
+
+.modal {
+  width: 100%;
+  background-color: #00000042;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  display: block;
+}
+
+.hiddenModal {
+  display: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .activerouter {
+    margin-left: 0;
+  }
+}

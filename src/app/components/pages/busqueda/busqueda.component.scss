@@ -1,0 +1,76 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+$icon-color: #a6b7bf;
+$detalles: #a3a7ac;
+$detalle: #a3a7ac;
+$texto: #7c7c7c;
+$fondo: #456c9e;
+
+.container {
+  width: 100%;
+}
+
+.container-cards {
+  width: 100%;
+  //   border: solid blue 1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.card {
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 2px 3px #ececec;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em 2em;
+  .title {
+    font-family: $fuente-nunito;
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+
+.card-user {
+  margin: none;
+  margin: 1em 2em 1em 0;
+}
+
+hr {
+  border: none;
+  border-bottom: solid $detalle 1px;
+  margin: 1em 0;
+}
+
+.contenido {
+  width: 100%;
+
+  .nombre {
+    font-family: $fuente-raleway;
+    font-size: 13px;
+    margin-left: 1em;
+    padding-right: 3em;
+  }
+  img {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    margin: 0.7em 0;
+  }
+}
+
+.noencontrado {
+  width: 100%;
+  padding: 2em 1em;
+  font-family: $fuente-raleway;
+  font-size: 13px;
+  text-align: center;
+  background-color: #384b79;
+  border-radius: 5px;
+  color: #fff;
+}

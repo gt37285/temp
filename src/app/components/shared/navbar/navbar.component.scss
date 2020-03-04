@@ -1,0 +1,143 @@
+/**  fuentes */
+
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+$icon-color: #a6b7bf;
+$detalles: #232932;
+$texto: #a6b7bf;
+$fondo: #fff;
+
+.container {
+  width: 100%;
+  height: 60px;
+  background-color: $fondo;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1em 2em;
+  box-shadow: 0 0 1px #999797, 0 0 3px #c4c4c4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.etiqueta{
+  font-size: 14px;
+  font-family: $fuente-nunito;
+  color: $icon-color;
+}
+
+.icon-search{
+  // margin-right: 1em;
+}
+
+/**seccion izquierda*/
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #424242;
+}
+
+.logo {
+  .main {
+    font-family: $fuente-nunito;
+    font-size: 22px;
+    font-weight: 900;
+    margin-right: 0.2em;
+  }
+
+  .sub {
+    font-family: $fuente-raleway;
+    font-size: 12px;
+  }
+}
+
+.icon-bar {
+  margin-right: 1em;
+  font-size: 20px;
+  color: #242425 !important;
+}
+
+/**seccion derecha*/
+
+.right {
+  * {
+    display: inline-block;
+    margin-left: 1em;
+    vertical-align: middle;
+  }
+}
+
+.container-search {
+  transform: translateY(-100%);
+  transition: transform 0.1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0 1px #999797, 0 0 3px #c4c4c4;
+  height: 60px;
+  z-index: 10;
+
+  .caja {
+    height: inherit;
+    width: inherit;
+    padding: 7px 20px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+  }
+
+  .icon-times {
+    position: absolute;
+    top: 40%;
+    right: 3%;
+  }
+}
+
+.img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/**seccion detalles*/
+
+.icon {
+  color: $icon-color;
+  cursor: pointer;
+  &:hover {
+    color: $detalles;
+  }
+}
+
+.show_search {
+  transform: translateY(0);
+}
+
+.hidden_sub {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .logo {
+    .sub {
+      display: none;
+    }
+  }
+
+  .right {
+    * {
+      margin-left: 0.8em;
+    }
+  }
+}

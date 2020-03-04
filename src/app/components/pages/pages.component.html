@@ -1,0 +1,19 @@
+<div class="container">
+  <section class="navegacion">
+    <app-navbar (sidebar)="menu = $event"></app-navbar>
+  </section>
+
+  <section class="main">
+    <article class="sidenavbar">
+      <app-sidebar [menu]="menu"></app-sidebar>
+    </article>
+    <article class="router" [ngClass]="{ activerouter: menu }">
+      <router-outlet></router-outlet>
+    </article>
+  </section>
+
+  <app-modal-upload
+    class="modal"
+    [ngClass]="{ hiddenModal: _modalServices.showModal.mostrar }"
+  ></app-modal-upload>
+</div>

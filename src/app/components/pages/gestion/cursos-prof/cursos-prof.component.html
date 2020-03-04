@@ -1,0 +1,366 @@
+<div class="container">
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+
+    <!-- seccion para los cursos  -->
+
+    <div class="container-user">
+
+        <div class="registrarCurso registro card">
+            <p class="title">Registrar nuevo Curso</p>
+            <form #form="ngForm" class="formulario" (ngSubmit)="crearCurso(form)">
+                <div class="container-formulario">
+                    <div class="input">
+                        <label for="">Titulo</label>
+                        <div class="container-caja">
+                            <i class="fas fa-chalkboard-teacher icon icon-title"></i>
+                            <input type="text" class="caja" name="nombre" placeholder="Titulo o Nombre del Curso"
+                                autocomplete="off" ngModel required />
+                        </div>
+                    </div>
+
+                    <div class="input input-select">
+                        <mat-form-field>
+                            <mat-label>Dificultad</mat-label>
+                            <mat-select [(value)]="selectedDificultad">
+                                <mat-option [value]="item" *ngFor="let item of dificultad"> {{item |capitalizar}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="input input-textarea">
+                        <mat-form-field class="textarea">
+                            <textarea style="resize: none;" matInput placeholder="Descripcion del curso" rows="7"
+                                name="descripcion" ngModel required></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <button type="submit" mat-raised-button class="btn-submit submit-curso">
+                    Registrar Curso
+                </button>
+            </form>
+        </div>
+
+        <section class="container-table card animated fadeIn">
+            <div>
+                <div class="opciones-demo">
+                    <p class="registrados">
+                        Cursos ( <span>{{totalCursos }}</span> )
+                    </p>
+                    <div class="paginacion">
+                        <div class="regestro">
+                            <!-- <i class="fas fa-plus-circle icon iconadd" (click)="addCurso()"></i> -->
+                        </div>
+                        <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesde(-4)"></i>
+                        <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesde(4)"></i>
+                    </div>
+                </div>
+
+                <div class="noencontrado" *ngIf="totalCursos <= 0">
+                    no hay registros
+                </div>
+
+
+                <div style="overflow-x: auto;" *ngIf="totalCursos">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Titulo</th>
+                                <th>Puntuacion</th>
+                                <th>Dificultad</th>
+                                <th>Modulos</th>
+                                <th>Fecha</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="animated fadeIn">
+                            <tr *ngFor="let curso of cursos">
+                                <td style="text-align: center;">
+                                    <img class="img" [src]="curso.img | imagen: 'cursos'" alt=""
+                                        (click)="mostrarModal(curso)" />
+                                </td>
+                                <td>{{ curso.nombre | capitalizar }}</td>
+                                <td>{{ curso.puntuacion }}</td>
+                                <td>{{ curso.dificultad }}</td>
+                                <td>{{ curso.modulos.length }}</td>
+                                <td>{{ curso.fecha | date }}</td>
+
+                                <td style="text-align: center;">
+                                    <i class="fas fa-pen icon icon-edit" (click)="modal('curso',curso)">
+                                    </i>
+                                    <i class="fas fa-trash icon icon-delete" (click)="eliminarCurso(curso)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- seccion para los objetivos  -->
+    <div class="container-modulox">
+        <div class="container-user ">
+    
+            <div class="registraModulo registro card">
+                <p class="title">Registrar un nuevo Objetivo</p>
+                <form #formObj="ngForm" class="formulario" (ngSubmit)="registrarObj(formObj)">
+                    <div class="container-formulario">
+                        <div class="input">
+                            <label for="">Titulo</label>
+                            <div class="container-caja">
+                                <i class="fab fa-codepen icon icon-title"></i>
+                                <input type="text" class="caja" name="nombre" placeholder="Nombre del Objetivo"
+                                    autocomplete="off" ngModel required />
+                            </div>
+                        </div>
+    
+                        <div class="input input-select">
+                            <mat-form-field>
+                                <mat-label>Selecciona un curso</mat-label>
+                                <mat-select [(value)]="selectedCursoObjReg">
+                                    <mat-option [value]="curso._id" *ngFor="let curso of cursos"> {{curso.nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+    
+                    <button type="submit" mat-raised-button class="btn-submit">
+                        Registrar Objetivo
+                    </button>
+                </form>
+            </div>
+    
+            <section class="container-modulo card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Objetivos ( <span>{{ totalObjetivos }}</span> )
+                        </p>
+                        <div class="paginacion">
+                            <div class="regestro">
+                                <div class="input selectedModulo">
+                                    <mat-form-field>
+                                        <mat-label>Curso</mat-label>
+                                        <mat-select [(value)]="selectedCursoObj">
+    
+                                            <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos" (click)="listarObjetivos()">
+                                                {{curso.nombre}}
+                                            </mat-option>
+    
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="noencontrado" *ngIf="totalObjetivos <= 0">
+                        no se encontraron objetivos para el curso seleccionado
+                    </div>
+    
+    
+                    <div style="overflow-x: auto;" *ngIf="totalObjetivos > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="animated fadeIn">
+                                <tr *ngFor="let objetivo of objetivos">
+    
+                                   
+                                    <td class="nombre-td">
+                                        <div class="containercaja">
+                                            <input type="text" class="caja" [value]="objetivo.nombre" name="nombre" [(ngModel)]="objetivo.nombre ">
+                                        </div>
+                                    </td>
+
+                                    <td>{{ objetivo.fecha | date }}</td>
+    
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarObj(objetivo)">
+                                        </i>
+                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarObj(objetivo)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+        </div>
+    </div>
+
+    <!-- seccion para los requisitos  -->
+
+    <div class="container-modulox">
+        <div class="container-user ">
+    
+            <div class="registraModulo registro card">
+                <p class="title">Registrar un nuevo requerimento</p>
+                <form #formReq="ngForm" class="formulario" (ngSubmit)="registrarReq(formReq)">
+                    <div class="container-formulario">
+                        <div class="input">
+                            <label for="">Titulo</label>
+                            <div class="container-caja">
+                                <i class="fab fa-codepen icon icon-title"></i>
+                                <input type="text" class="caja" name="nombre" placeholder="Nombre del requerimento"
+                                    autocomplete="off" ngModel required />
+                            </div>
+                        </div>
+    
+                        <div class="input input-select">
+                            <mat-form-field>
+                                <mat-label>Selecciona un curso</mat-label>
+                                <mat-select [(value)]="selectedCursoReqReg">
+                                    <mat-option [value]="curso._id" *ngFor="let curso of cursos"> {{curso.nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+    
+                    <button type="submit" mat-raised-button class="btn-submit">
+                        Registrar requerimento
+                    </button>
+                </form>
+            </div>
+    
+            <section class="container-modulo card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Requerimentos ( <span>{{ totalRequisitos }}</span> )
+                        </p>
+                        <div class="paginacion">
+                            <div class="regestro">
+                                <div class="input selectedModulo">
+                                    <mat-form-field>
+                                        <mat-label>Curso</mat-label>
+                                        <mat-select [(value)]="selectedCursoReq">
+    
+                                            <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos"
+                                                (click)="listarRequisitos()">
+                                                {{curso.nombre}}
+                                            </mat-option>
+    
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="noencontrado" *ngIf="totalRequisitos <= 0">
+                        no se encontraron requisitos para el curso seleccionado
+                    </div>
+    
+    
+                    <div style="overflow-x: auto;" *ngIf="totalRequisitos > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="animated fadeIn">
+                                <tr *ngFor="let requerimeto of requisitos">
+    
+    
+                                    <td class="nombre-td">
+                                        <div class="containercaja">
+                                            <input type="text" class="caja" [value]="requerimeto.nombre" name="nombre"
+                                                [(ngModel)]="requerimeto.nombre ">
+                                        </div>
+                                    </td>
+    
+                                    <td>{{ requerimeto.fecha | date }}</td>
+    
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarReq(requerimeto)">
+                                        </i>
+                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarReq(requerimeto)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+        </div>
+    </div>
+
+   
+</div>
+
+
+
+
+<!-- modal reistro de cursos  -->
+
+
+
+<div class="container-modal" [ngClass]="{ hiddenModal: _serviceModal.showModalAdd }">
+    <div class="modal modal-gen" *ngIf="modalDatosDescripcion">
+        <section class="card-div">
+            <p class="title">Edición</p>
+            <p class="subtitle">Ser bachiller</p>
+            <i class="fas fa-times icon icon-times" (click)="cerrarModal()"></i>
+
+            <hr />
+
+            <form #form="ngForm" class="formulario" (ngSubmit)="actualizar(form)">
+                <div class="container-formulario">
+
+                    <div class="input">
+                        <label for="">Nombre</label>
+                        <div class="container-caja">
+                            <i class="fas fa-chalkboard-teacher icon icon-title"></i>
+                            <input type="text" class="caja" name="nombre" placeholder="Titulo o Nombre"
+                                autocomplete="off" ngModel="{{modalDatosDescripcion.nombre}}" required />
+                        </div>
+                    </div>
+
+                    <div class="input input-select">
+                        <mat-form-field>
+                            <mat-label>Dificultad</mat-label>
+                            <mat-select [(value)]="selectedDificultadReg">
+                                <mat-option [value]="item" *ngFor="let item of dificultad"> {{item |capitalizar}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="input input-textarea">
+                        <mat-form-field class="textarea">
+                            <textarea matInput placeholder="Descripcion" rows="7" name="descripcion"
+                                [(ngModel)]="modalDatosDescripcion.descripcion" required></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="botones">
+                    <button type="submit" mat-raised-button class="btn-submitx">
+                        Actualizar Descripcion
+                    </button>
+
+                    <button type="button" mat-raised-button class="btn-submitx btn-cancelx" (click)="cerrarModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

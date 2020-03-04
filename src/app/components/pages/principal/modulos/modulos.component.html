@@ -1,0 +1,172 @@
+<app-loading *ngIf="loading"></app-loading>
+<div class="container fadeIn">
+
+    <!-- seccion para el video   -->
+
+    <section class="video">
+
+        <!-- frame para videos de fembed  -->
+        <iframe class="video_frame" [src]=" clase.video | domSeguro:'https://www.fembed.com/v/'" frameborder="0"
+            allowfullscreen></iframe>
+
+            <!-- frame para videos de youtube  
+        <iframe class="video_frame " [src]=" clase.video | domSeguro:'https://www.youtube-nocookie.com/embed' "
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe> -->
+
+        <!-- seccion para la descripcion  -->
+
+        <div class="descripcion">
+            <div class="desc">
+                <div class="left">
+                    <p class="nombre">{{clase.nombre | uppercase}}</p>
+                    <p class="fecha">{{clase.fecha | date:'dd/MMMM/yyyy'}}</p>
+                </div>
+
+                <div class="likes">
+                    <i class="fas fa-comments icon cursor" (click)="show_comentarios=true"></i>
+                    <i class="fas fa-heart icon-likes icon cursor"></i>
+                    <p class="like">{{clase.likes}}</p>
+                </div>
+            </div>
+
+            <div class="det">{{clase.descripcion}}</div>
+        </div>
+
+    </section>
+
+    <!-- seccion lateral derecho aside  -->
+
+    <section class="aside fadeIn">
+
+        <!-- seccion para el temario  -->
+
+        <div class="temario">
+            <p class="title">Temario</p>
+
+            <div *ngFor="let item of curso.modulos">
+                <mat-expansion-panel class="acordeon">
+
+
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title class="tema">
+                            <i class="fas fa-check-circle icon"></i>
+                            <p>{{item.nombre | lowercase}} </p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="contenido">
+                        <div class="clase" *ngFor="let clase of item.clases">
+                            <i class="far fa-play-circle icon"></i>
+                            <p class="cursor videos" (click)="changeVideo(clase)">{{clase.nombre}}</p>
+                        </div>
+                        <!-- <div class="clase" *ngFor="let recurso of item.recursos">
+                            <i class="far fa-file icon"></i>
+                            <p class="cursor videos" (click)="descarga(recurso)" *ngIf="recurso.extension == 'pdf'">
+                                {{recurso.tema}}</p>
+
+                            <a [href]="recurso.nombre | descarga:'recursos'" class="videos"
+                                download="{{recurso.tema}}">{{recurso.tema}}</a>
+
+                        </div> -->
+                    </div>
+
+                </mat-expansion-panel>
+            </div>
+
+        </div>
+
+
+        <!-- seccion para los recursos   -->
+
+
+        <div class="temario recursos" *ngIf="true">
+
+            <div *ngFor="let item of curso.modulos">
+                <p class="title" *ngIf="item.recursos.length > 0">Recursos</p>
+    
+                <div *ngIf="item.recursos.length > 0">
+    
+                    <!-- <mat-expansion-panel class="acordeon" >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="tema">{{item.nombre}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+     -->
+                        <div class="contenido" *ngFor="let recurso of item.recursos">
+                            <div class="contenido">
+                                <div class="clase">
+                                    <i class="far fa-file icon"></i>
+                                    <a [href]="recurso.nombre | descarga:'recursos'" class="videos"
+                                        download="{{recurso.tema}}">{{recurso.tema | capitalizar}}</a>
+                                </div>
+                            </div>
+                        </div>
+    
+                    <!-- </mat-expansion-panel> -->
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- seccion para las tareas   -->
+        
+        
+        <div class="temario recursos" *ngIf="true">
+        
+            <div *ngFor="let tarea of tareas">
+                <p class="title" *ngIf="tareas?.length > 0">Actividades</p>
+
+                    <div class="contenido" >
+                        <div class="contenido">
+                            <div class="clase">
+                                <i class="far fa-file icon"></i>
+                                <a routerLink="/aula/scheduler" class="enlaceTarea videos">
+                                    <p>{{tarea.title}}</p>
+                                    <p>{{tarea.end | date}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        
+        </div>
+
+        <!-- seccion para las evaluaciones   -->
+        
+        
+        <div class="temario recursos" *ngIf="true">
+        
+            <div *ngFor="let evaluacion of evaluaciones">
+                <p class="title" *ngIf="evaluacion?.length > 0">Evaluaciones</p>
+
+                    <div class="contenido" >
+                        <div class="contenido">
+                            <div class="clase">
+                                <i class="far fa-file icon"></i>
+                                <div (click)="evaluacionregistro(evaluacion._id)" class="enlaceTarea videos cursor">
+                                    <p>{{evaluacion.nombre}}</p>
+                                    <p>{{evaluacion.fecha_i | date}}</p>
+                                    <p>{{evaluacion.fecha_f | date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        
+        </div>
+
+
+    </section>
+
+    <!-- seccion de comentarios  -->
+
+    <!-- <object [data]="archivo | archivos:'recursos'" width="100%" height="1000px" *ngIf="archivo"></object> -->
+
+    <section class="main fadeIn" *ngIf="show_comentarios">
+        <!-- <app-comentarios [clase]="clase._id"></app-comentarios> -->
+    </section>
+
+</div>

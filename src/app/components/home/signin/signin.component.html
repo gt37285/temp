@@ -1,0 +1,103 @@
+<div class="container fadeIn">
+
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <main class="main">
+    <section class="logo">
+      <p class="title">Bachiller</p>
+      <p class="subtitle">La mejor experiencia</p>
+    </section>
+
+    <section class="logo-web">
+      <p class="title">Sign in</p>
+      <p class="subtitle">vive la mejor experiencia</p>
+    </section>
+
+    <form [formGroup]="forma" (ngSubmit)="enviar()" class="contenedor-site">
+      <section class="container-caja">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="email"
+          class="caja"
+          placeholder="Usuario - correo"
+          formControlName="email"
+          required
+        />
+      </section>
+
+      <section class="mensaje">
+        <p
+          class="fadeIn"
+          *ngIf="forma.controls['email'].errors?.required && !forma.pristine"
+        >
+          El email es requerido
+        </p>
+        <p
+          class="fadeIn"
+          *ngIf="forma.controls['email'].errors?.pattern && !forma.pristine"
+        >
+          Email incorrecto
+        </p>
+      </section>
+
+      <section class="container-caja">
+        <i class="fa fa-key icon"></i>
+
+        <input
+          [type]="text_show | pipe_password: icon_eye"
+          placeholder="Contraseña"
+          class="caja pass"
+          name="password"
+          autocomplete="off"
+          formControlName="password"
+        />
+        <i
+          class="fa fa-eye ico-eye cursor"
+          (click)="iconEye()"
+          *ngIf="icon_eye"
+        ></i>
+        <i
+          class="fa fa-eye-slash ico-eye cursor"
+          (click)="iconEyeSlash()"
+          *ngIf="!icon_eye"
+        ></i>
+      </section>
+
+      <section class="mensaje">
+        <p
+          class="fadeIn"
+          *ngIf="forma.controls['password'].errors?.required && !forma.pristine"
+        >
+          La contraseña es requerida
+        </p>
+        <p
+          class="fadeIn"
+          *ngIf="
+            forma.controls['password'].errors?.minlength && !forma.pristine
+          "
+        >
+          Minimo 8 digitos
+        </p>
+      </section>
+
+      <section class="validacion">
+        <p class="credenciales fadeIn" *ngIf="!resp.success">
+          {{ resp.message }}
+        </p>
+      </section>
+
+      <button type="submit" mat-raised-button class="boton cursor">
+        Sign-in
+      </button>
+
+      <section class="validacion">
+        <p class="container-enlace">
+          <a class="enlace" [routerLink]="['/reset']"
+            >Olvidaste tu contraseña?</a
+          >
+        </p>
+      </section>
+    </form>
+  </main>
+</div>

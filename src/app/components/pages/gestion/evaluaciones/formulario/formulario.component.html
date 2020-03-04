@@ -1,0 +1,224 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="container">
+
+    <section class="main">
+        <div class="containerPregunta">
+            <div class="head">
+                <div>
+                    <span class="title">Pregunta {{pregunta?.numero}}</span> 
+                    <span class="subtitle">({{pregunta?.tipo}})</span>
+                </div>
+                <button class="vistaP" type="button" class="btn opcion-btn especial-btn" mat-raised-button (click)="registrarPregunta()">Guardar Pregunta</button>
+            </div>
+
+            <div class="container-editor">
+                <ckeditor class="editor" [(ngModel)]="model.editorData" [config]="model.config"></ckeditor>
+            </div>
+
+            <!-- formulario para preguntas de  respuesta multiple -->
+
+            <form  [formGroup]="form" class="formulario" (ngSubmit)="respuestasFormMultiple()" *ngIf="pregunta?.tipo == 'Respuesta Multiple'">
+                <div class="container-opciones">
+
+                    <div class="res-correcta">
+
+                        <mat-form-field class="select">
+                            <mat-label>Puntaje</mat-label>
+                            <mat-select [(value)]="selectPuntaje" >
+                
+                                <mat-option  [value]="puntaje" *ngFor="let puntaje of puntajes">{{puntaje}}</mat-option>
+                
+                            </mat-select>
+                        </mat-form-field>
+
+                        <span>
+                            {{this.selectPuntaje}}
+                        </span>
+                    </div>   
+
+                    <button class="btn  opcion-btn" type="button" mat-raised-button (click)="addResp()">Agregar Respuesta</button>
+                    <button class="btn opcion-btn" type="reset" mat-raised-button >Limpiar</button>
+                    <button class="btn  opcion-btn especial-btn" type="submit" mat-raised-button >Registrar</button>
+                </div>
+
+                <div class="container-respuestas">
+                    <div formArrayName="respuestas" class="classrespuestas" *ngFor="let repuesta of form.get('respuestas')['controls']; let i = index" >
+                        <div [formGroupName]="i" class="item-respuesta">
+                            <input type="text" formControlName="nombre" placeholder="Respuesta {{i+1}}" required>
+                            <mat-checkbox color="primary" class="icon-res icon-resop" formControlName="estado"></mat-checkbox>
+                            <i class="fas fa-trash-alt icon-res " (click)="eliminarRespuesta(i)"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+             <!-- formulario para preguntas de  respuesta unica -->
+
+             <form  [formGroup]="formuniq" class="formulario" (ngSubmit)="respuestasFormUnica()" *ngIf="pregunta?.tipo == 'Respuesta Unica'">
+                <div class="container-opciones">
+
+                    <div class="res-correcta">
+
+                        <mat-form-field class="select">
+                            <mat-label>Puntaje</mat-label>
+                            <mat-select [(value)]="selectPuntaje" >
+                
+                                <mat-option  [value]="puntaje" *ngFor="let puntaje of puntajes">{{puntaje}}</mat-option>
+                
+                            </mat-select>
+                        </mat-form-field>
+
+                        <span>
+                            {{this.selectPuntaje}}
+                        </span>
+                    </div>
+
+                    <div class="res-correcta">
+
+                        <mat-form-field class="select">
+                            <mat-label>Respuesta Corecta</mat-label>
+                            <mat-select [(value)]="selectedUniq" >
+                
+                                <mat-option  [value]="i+1" *ngFor="let repuesta of formuniq.get('respuestas')['controls']; let i = index">
+                                    {{i+1}}
+                                </mat-option>
+                
+                            </mat-select>
+                        </mat-form-field>
+
+                        <span>
+                            {{this.selectedUniq}}
+                        </span>
+                    </div>
+
+                    <button class="btn  opcion-btn" type="button" mat-raised-button (click)="addRespuniq()">Agregar Respuesta</button>
+                    <button class="btn opcion-btn" type="reset" mat-raised-button >Limpiar</button>
+                    <button class="btn  opcion-btn especial-btn" type="submit" mat-raised-button >Registrar</button>
+                </div>
+                
+                <div class="container-respuestas">
+                    <div formArrayName="respuestas"  class="classrespuestas" *ngFor="let repuesta of form.get('respuestas')['controls']; let i = index" >
+                        <div [formGroupName]="i" class="item-respuesta">
+                            <input type="text" formControlName="nombre" placeholder="Respuesta {{i+1}}" required>
+                            <i class="fas fa-trash-alt icon-res" (click)="eliminarRespuestauniq(i)"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- opciones para preguntas de respuesta de opcion doble  -->
+
+           <form  [formGroup]="formvf"  class="formulario" (ngSubmit)="respuestasvf()" *ngIf="pregunta?.tipo == 'Opcion Doble'">
+                <div class="container-opciones">
+
+                  
+                    <div class="res-correcta">
+
+                        <mat-form-field>
+                            <mat-label>Respuesta Correcta</mat-label>
+                            <mat-select [(value)]="selected">
+                
+                                <mat-option value="A" selected="true">Respuesta A</mat-option>
+                                <mat-option value="B">Respuesta B</mat-option>
+                
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="res-correcta">
+
+                        <mat-form-field class="select">
+                            <mat-label>Puntaje</mat-label>
+                            <mat-select [(value)]="selectPuntaje" >
+                
+                                <mat-option  [value]="puntaje" *ngFor="let puntaje of puntajes">{{puntaje}}</mat-option>
+                
+                            </mat-select>
+                        </mat-form-field>
+
+                        <span>
+                            {{this.selectPuntaje}}
+                        </span>
+                    </div>
+
+
+                    <button class="btn opcion-btn" type="reset" mat-raised-button >Limpiar</button>
+                    <button class="btn  opcion-btn especial-btn" type="submit" mat-raised-button >Registrar</button>
+                </div>
+
+                <div class="container-respuestas">
+                    <div formArrayName="respuestas" class="classrespuestas" *ngFor="let repuesta of formvf.get('respuestas')['controls']; let i = index">
+                        <div [formGroupName]="i" class="item-respuesta">
+                            <input type="text" formControlName="nombre" placeholder="Respuesta {{i+1}}" required>
+                        </div>
+                    </div>
+                </div>
+           </form>
+
+        </div>
+    </section>
+
+    <!-- aside lateral contenedor para la lista de preguntas  -->
+
+    <section class="aside_preguntas">
+        <button type="button" class="btn" mat-raised-button (click)="addPregunta(modal)">Nueva Pregunta</button>
+
+        <hr>
+
+        <div id="container-preguntas" class="container-preguntas" *ngFor="let pregunta of preguntas" #container>
+
+                <button class="pregunta"  mat-raised-button type="button" (click)="changePregunta(pregunta)"> 
+                    <span>Pregunta {{pregunta.numero}}</span>
+                </button>                
+                <i class="far fa-times-circle icon icon-trash" (click)="eliminar(pregunta)" *ngIf="total > 1"></i>
+        </div>
+
+    </section>
+</div>
+
+<!-- modal de pregunta  -->
+
+<div class="container-modalx" #modal>
+    <div class="modal">
+        <section class="container-title">
+            <p class="title"> Agregar nueva Pregunta </p>
+            <p class="subtitle">Ser bachiller</p> 
+        </section>
+
+        <hr>
+
+       <section class="container-opcion">
+
+            <div class="opcion" (click)="agregarPregunta('A',modal)">
+                
+                <img class="img" src="../../../../../../assets/img/truefalse.PNG" alt="">
+                <p class="title">Opcion Doble</p>
+                <p class="subtitle">
+                    los estudiantes tendran solo dos opciones de respuesta
+                </p>
+            </div>
+
+            <div class="opcion" (click)="agregarPregunta('B',modal)">
+                
+                <img class="img" src="../../../../../../assets/img/multiples.PNG" alt="">
+                <p class="title">Respuesta Multiple</p>
+                <p class="subtitle">
+                    los estudiantes tendran varias opciones de respuesta
+                </p>
+            </div>
+
+            <div class="opcion" (click)="agregarPregunta('D',modal)">
+                
+                <img class="img" src="../../../../../../assets/img/unico.PNG" alt="">
+                <p class="title">Respuesta unica</p>
+                <p class="subtitle">
+                    los estudiantes solo deberan elegir una opcion
+                </p>
+            </div>
+
+       </section>
+    </div>
+</div>

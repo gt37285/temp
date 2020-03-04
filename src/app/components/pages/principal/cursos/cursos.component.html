@@ -1,0 +1,33 @@
+<div class="container fadeIn">
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <div class="container-search">
+    <section class="search">
+      <div class="container-caja">
+        <i class="fas fa-search icon"></i>
+        <input #input type="text" class="caja" (keyup)="buscar(input.value)" placeholder="Buscar Cursos" />
+      </div>
+    </section>
+  </div>
+
+  <div class="main">
+    <div class="card cursor" *ngFor="let curso of cursos" (click)="target(curso)">
+      <img [src]="curso.img | imagen: 'cursos'" alt="" class="img_curso" />
+      <div class="card_cont">
+        <p class="titulo">{{ curso.nombre }}</p>
+        <div class="desc">{{ curso.descripcion }}</div>
+        <div class="clasificacion">
+          <i class="fas fa-star icon_start"></i>
+          <span>{{ curso.puntuacion }}</span>
+        </div>
+
+        <div class="profesores">
+          <img [src]="curso.usuario.img | imagen" alt="" />
+          <span>{{ curso.usuario.nombre }} {{ curso.usuario.apellido }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>

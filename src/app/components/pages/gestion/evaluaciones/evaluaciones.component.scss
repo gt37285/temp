@@ -1,0 +1,199 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+
+.containercaja{
+    width: 100%;
+    border:none;
+    outline: none;
+    position: relative;
+
+    &::after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: #2a4174;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transition: all .3s ease-in-out;
+    }
+
+    &:focus-within::after{
+        width: 90%;
+        left: 0;
+    }
+
+    .caja{
+        width: 100%;
+        font-family: $fuente-raleway;
+        font-size: 12px;
+        text-align: center;
+        border: none;
+        outline: none;
+        padding-bottom: 4px;
+    }   
+}
+
+.nombre-td{
+    width: 200px;
+}
+
+.container-modulox{
+    margin: 4em 0 !important;
+}
+
+.tools{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button_add{
+    font-family: $fuente-nunito;
+    color: #fff;
+    background-color: #F15D22;
+    font-size: 14px;
+    padding: 0 2em;
+}
+
+
+.container-modalx{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000a8;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+
+    .modal{
+        width: 400px;
+        background-color: #fff;
+        box-shadow: 3px -2px 4px #a7a7a738;
+        z-index: 20;
+    }
+}
+
+.show-modal{
+    display: flex;
+}
+
+.modal{
+
+    .selectcurso{
+        width: 100% !important;
+        margin: 1em 0;
+    }
+
+    .textlab{
+        p{
+            font-family: $fuente-raleway;
+            font-size: 12px;
+            color: #9D9C9C;
+        }
+        margin: 1em 0;
+    }
+
+    .textarea{
+        width: 100%;
+        resize: none;
+        border: none;
+        outline: none;
+        margin: 1em 0;
+    }
+
+    .botones-container{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        *{
+            width: 48%;
+            font-family: $fuente-nunito;
+            font-size: 13px;
+        }
+
+        .submit{
+            color: #fff;
+            background-color: #2a4174;
+        }
+
+        .btn-cancelar{
+            color: #fff;
+            background-color: #F15D22;
+        }
+    }
+            
+    .forminput{
+        width: 100%;
+        font-family: $fuente-raleway;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        margin: 1em 0;
+        
+        .input{
+            width: 100%;
+            margin: 1em 0;
+            position: relative;
+            border-bottom: solid 1px #adadad;
+
+            .caja{
+                width: 100%;
+                border: none;
+                font-family: $fuente-raleway;
+                font-size: 12px;
+                color: #2C397F;
+                outline: none;
+                margin: 1em 0;
+
+                &::placeholder{
+                    font-family: $fuente-raleway;
+                    font-size: 12px;
+                    color: #706f6f;
+                }
+            }
+
+            &::after{
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 1.5px;
+                background-color: #2C397F;
+                transition: width .3s ease-in-out;
+            }
+
+            &:focus-within::after{
+                width: 100%;
+            }
+        }
+    }
+
+}
+
+.containerTiempo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.labelTiempo{
+    width: 100%;
+    text-align: left;
+    margin-top: 1em;
+    color: #9D9C9C;
+    font-family: $fuente-raleway;
+    font-size: 12px;
+}

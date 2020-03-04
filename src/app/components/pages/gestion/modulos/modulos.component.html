@@ -1,0 +1,168 @@
+<div class="container">
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <!-- <section class="search">
+        <div class="container-caja">
+            <i class="fas fa-search icon"></i>
+            <input #input type="text" class="caja" placeholder="Buscar Cursos" />
+        </div>
+    </section> -->
+
+
+        <!-- seccion para los modulos  -->
+        <div class="container-modulox">
+            <div class="container-user ">
+            
+                <div class="registraModulo registro card">
+                    <p class="title">Registrar un nuevo modulo</p>
+                    <form #formModulo="ngForm" class="formulario" (ngSubmit)="crearModulo(formModulo)">
+                        <div class="container-formulario">
+                            <div class="input">
+                                <label for="">Nombre</label>
+                                <div class="container-caja">
+                                    <i class="fab fa-codepen icon icon-title"></i>
+                                    <input type="text" class="caja" name="nombre" placeholder="Nombre del modulo" autocomplete="off"
+                                        ngModel required />
+                                </div>
+                            </div>
+            
+                            <div class="input input-select">
+                                <mat-form-field>
+                                    <mat-label>Selecciona un curso</mat-label>
+                                    <mat-select [(value)]="selectedCursoMdlReg">
+                                        <mat-option [value]="curso._id" *ngFor="let curso of cursos"> {{curso.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+            
+                            <div class="input input-textarea">
+                                <mat-form-field class="textarea">
+                                    <textarea style="resize: none;" matInput placeholder="Descripcion del modulo" rows="7"
+                                        name="descripcion" ngModel required></textarea>
+                                </mat-form-field>
+                            </div>
+            
+            
+                        </div>
+        
+                        <button type="submit" mat-raised-button class="btn-submit">
+                            Registrar Modulo
+                        </button>
+                    </form>
+                </div>
+            
+                <section class="container-modulo card animated fadeIn">
+                    <div>
+                        <div class="opciones-demo">
+                            <p class="registrados">
+                                Modulos ( <span>{{ totalModulos }}</span> )
+                            </p>
+                            <div class="paginacion">
+                                <div class="regestro">
+                                    <div class="input selectedModulo">
+                                        <mat-form-field>
+                                            <mat-label>Curso</mat-label>
+                                            <mat-select [(value)]="selectedCursoMdl">
+            
+                                                <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos">
+                                                    {{curso.nombre}}
+                                                </mat-option>
+            
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <i class="fas fa-search icon" (click)="cargarModulos()"></i>
+                                <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesdeMdlPrev(-7)"></i>
+                                <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesdeMdlNext(7)"></i>
+                            </div>
+                        </div>
+            
+                        <div class="noencontrado" *ngIf="totalModulos <= 0">
+                            no se encontraron modulos para el curso seleccionado
+                        </div>
+            
+            
+                        <div style="overflow-x: auto;" *ngIf="totalModulos > 0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Recursos</th>
+                                        <th>clases</th>
+                                        <th>Fecha</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="animated fadeIn">
+                                    <tr *ngFor="let modulo of modulos | slice:desdePrevMdl:desdeNextMdl">
+            
+                                        <td class="nombre-td">
+                                            <div class="containercaja">
+                                                <input type="text" class="caja" [value]="modulo.nombre" name="nombre" [(ngModel)]="modulo.nombre ">
+                                            </div>
+                                        </td>
+    
+                                        <td>{{ modulo.recursos.length }}</td>
+                                        <td>{{ modulo.clases.length }}</td>
+                                        <td>{{ modulo.fecha | date }}</td>
+            
+                                        <td style="text-align: center;">
+                                            <i class="fas fa-pen icon icon-edit" (click)="actualizarMdl(modulo)">
+                                            </i>
+                                            <i class="fas fa-tag icon icon-desc"  (click)="modal('modulo',modulo)"></i>
+                                            <i class="fas fa-trash icon icon-delete" (click)="eliminarMdl(modulo)"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            
+            </div>
+        </div>
+        
+
+</div>
+
+
+<!-- modal reistro de cursos  -->
+
+
+
+<div class="container-modal" [ngClass]="{ hiddenModal: _serviceModal.showModalAdd }">
+    <div class="modal modal-gen" *ngIf="modalDatosDescripcion">
+        <section class="card-div">
+            <p class="title">Edición</p>
+            <p class="subtitle">Ser bachiller</p>
+            <i class="fas fa-times icon icon-times" (click)="cerrarModal()"></i>
+
+            <hr />
+
+            <form #form="ngForm" class="formulario" (ngSubmit)="actualizar(form)">
+                <div class="container-formulario">
+
+                    <div class="input input-textarea">
+                        <mat-form-field class="textarea">
+                            <textarea matInput placeholder="Descripcion" rows="7" name="descripcion"
+                                [(ngModel)]="modalDatosDescripcion.descripcion" required></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="botones">
+                    <button type="submit" mat-raised-button class="btn-submitx">
+                        Actualizar Descripcion
+                    </button>
+
+                    <button type="button" mat-raised-button class="btn-submitx btn-cancelx" (click)="cerrarModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,302 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.container{
+    position: relative;
+
+    &::-webkit-scrollbar {
+        width: 8px;     /* Tamaño del scroll en vertical */
+        height: 8px;    /* Tamaño del scroll en horizontal */
+        display: none;  /* Ocultar scroll */
+    }
+
+    .aside_preguntas{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 250px;
+        height: calc( 100vh - 60px );
+        background-color: #fff;
+        color: #000;
+        overflow-y: auto;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        padding: 1em 0;
+        box-shadow: 2px 2px 5px #b3b3b36e;
+
+        &::-webkit-scrollbar {
+            width: 8px;     /* Tamaño del scroll en vertical */
+            height: 8px;    /* Tamaño del scroll en horizontal */
+            display: none;  /* Ocultar scroll */
+        }
+        
+        hr{
+            width: 80%;
+        }
+    }
+
+    .main{
+        width: calc( 100% - 250px );
+
+        .title{
+            font-family: $fuente-nunito;
+            font-size: 30px;
+            font-weight: bold;
+            color: #1d1d1da1;
+            margin-bottom: .5em;
+        }
+
+        .subtitle{
+            font-family: $fuente-raleway;
+            font-size: 12px;
+        }
+    }
+}
+
+.icon-trash{
+    font-size: 14px !important;
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+
+.btn{
+    width: 80%;
+    font-family: $fuente-raleway;
+    font-size: 13px;
+    margin: 1em 0;
+    background-color: #1260BE;
+    color: #fff;
+    font-weight: 800;
+}
+
+.opcion-btn{
+    width: 200px ;
+}
+
+.especial-btn{
+    background-color: #F1652D;
+}
+.container-preguntas{
+    width: 80%;
+    position: relative;
+    .pregunta{
+        width: 100%;
+        height: 37px;
+        font-family: $fuente-raleway;
+        font-size: 12px;
+        font-weight: 500;
+        background-color: #DFDFDF;
+        color: #000;
+        border: solid 1px #b3b3b36e;
+        box-shadow: 2px 2px 5px #b3b3b36e;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1em 0;
+        cursor: pointer;
+    }
+}
+
+
+.container-modalx{
+    height: calc( 100vh - 60px );
+    width: calc( 100% - 250px);
+    position: fixed;
+    bottom:  0;
+    left: 0;
+    background-color: #0000007a;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+
+    .modal{
+        position: absolute;
+        top: 20px;
+        right: 27px;
+        width: 430px;
+        background-color: #fff;
+        box-shadow: 3px -2px 4px #a7a7a738;
+        z-index: 20;
+
+        &::after{
+            content: "";
+            position: absolute;
+            right: -2.4%;
+            top: 3%;
+            width: 0;
+            height: 0;
+            border-left: 15px solid #fff;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+    }
+}
+
+.show-modal{
+    display: flex;
+}
+
+.container-opcion{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.opcion{
+    margin: 1em;
+    width: 150px;
+    border: solid 1px #aaaaaa;
+    background-color: #F2F2F2;
+    padding: 1em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    &:hover{
+        border: solid 1px #273cb3;
+
+    }
+
+    .img{
+        margin: 1em;
+        object-fit: cover;
+        display: block;
+    }
+
+    .title{
+        font-family: $fuente-raleway;
+        font-size: 13px !important;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    .subtitle{
+        font-family: $fuente-raleway;
+        font-size: 12px !important;
+        text-align: center;
+    }
+}
+
+.containerPregunta{
+    width: 100%;
+    .head{
+        width: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title{
+            font-size: 20px !important;
+        }
+        .subtitle{
+            font-size: 15px;
+            font-family: $fuente-raleway;
+            margin-left: 2em;
+            color: #1d1d1da1;
+        }
+    }
+}
+
+.container-editor{
+    margin-top: 3em;
+    .editor{
+        font-family: $fuente-raleway;
+    }
+}
+
+.formulario{
+    margin-top: 3em;
+    
+    .container-opciones{
+        padding: 1.5em 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #fff;
+        border: solid #e0e0e054 1px;
+        border-radius: 5px;
+    }
+
+    .btn{
+        margin-left: 1em;
+    }
+
+    .res-correcta{
+        width: 250px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-family: $fuente-raleway;
+        font-size: 15px;
+
+        .select{
+            width: 150px;
+        }
+        span{
+            font-size: 12px;
+        }
+    }
+
+
+    .container-respuestas{
+        width: 100%;
+        margin-top: 2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .classrespuestas{
+            width: 49%;
+        }
+        
+        .item-respuesta{
+            width: 100%;
+            position: relative;
+            margin: 2em 0;
+
+            input{
+                width: inherit;
+                padding: 1.3em 3em 1.3em 1em;
+                font-family: $fuente-raleway;
+                font-size: 20px;
+                outline: none;
+                border-radius: 5px;
+                border: none;
+                border: solid 1px #dfdfdf;
+                color: #797979;
+                box-shadow: 1px 3px 4px #dfdfdf;
+            }
+
+            .icon-res{
+                position: absolute;
+                right: 3%;
+                bottom: 40%;
+                color: #692020;
+                cursor: pointer;
+                transform: scale(1);
+                transition: transform .3s ease-in-out;
+                &:hover{
+                    transform: scale(1.2);
+                }
+            }
+
+            .icon-resop{
+                position: absolute;
+                right: 6%; 
+            }
+        }
+    }
+}

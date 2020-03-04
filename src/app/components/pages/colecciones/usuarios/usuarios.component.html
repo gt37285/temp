@@ -1,0 +1,359 @@
+<div class="container">
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <div class="container-user">
+    <section class="search">
+      <div class="container-caja">
+        <i class="fas fa-search icon"></i>
+        <input
+          #input
+          type="text"
+          class="caja"
+          (keyup)="buscarUsuario(input.value)"
+          placeholder="Buscar usuarios"
+        />
+      </div>
+    </section>
+
+    <app-loading *ngIf="loading"></app-loading>
+
+    <section class="container-table animated fadeIn">
+      <div class="card">
+        <div class="opciones-demo">
+          <p class="registrados">
+            Usuarios ( <span>{{ total }}</span> )
+          </p>
+          <div class="paginacion">
+            <div class="regestro">
+              <i class="fas fa-user-plus icon iconadd" (click)="addUser()"></i>
+            </div>
+            <i
+              class="fas fa-chevron-circle-left icon icon-pag"
+              (click)="cambiardesde(-6)"
+            ></i>
+            <i
+              class="fas fa-chevron-circle-right icon icon-pag"
+              (click)="cambiardesde(6)"
+            ></i>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Cedula</th>
+                <th>Institucion</th>
+                <th>Estado</th>
+                <th>Genero</th>
+                <th>Rol</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="animated fadeIn">
+              <tr *ngFor="let usuario of usuarios">
+                
+                <td style="text-align: center;"  *ngIf="!usuario.admin">
+                  <img
+                    class="img"
+                    [src]="usuario.img | imagen"
+                    alt=""
+                    (click)="mostrarModal(usuario)"
+                  />
+                </td>
+
+
+                <td *ngIf="!usuario.admin">
+                  <div class="containercaja">
+                    <input type="text" class="caja" [value]="usuario.nombre" name="nombre" [(ngModel)]="usuario.nombre ">
+                  </div>
+                </td>
+
+                <td *ngIf="!usuario.admin">
+                  <div class="containercaja">
+                    <input type="text" class="caja" [value]="usuario.apellido" name="apellido" [(ngModel)]="usuario.apellido">
+                  </div>
+                </td>
+
+                <td *ngIf="!usuario.admin">
+                  <div class="containercaja">
+                    <input type="text" class="caja" [value]="usuario.email " name="email" [(ngModel)]="usuario.email">
+                  </div>
+                </td>
+
+                <td *ngIf="!usuario.admin">
+                  <div class="containercaja">
+                    <input type="text" class="caja" [value]="usuario.cedula " name="cedula" [(ngModel)]="usuario.cedula" maxlength="10">
+                  </div>
+                </td>
+
+                <td *ngIf="!usuario.admin">
+
+                  <mat-form-field>
+                    <mat-select name="institucion" [(ngModel)]="usuario.institucion">
+                      <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">{{institucion.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                
+                <td *ngIf="!usuario.admin">
+                  <mat-form-field>
+                    <mat-select name="rol" [(ngModel)]="usuario.estado">
+                      <mat-option [value]="true">Activo</mat-option>
+                      <mat-option [value]="false">Inactivo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td *ngIf="!usuario.admin">
+                  <mat-form-field>
+                    <mat-select name="rol" [(ngModel)]="usuario.genero">
+                      <mat-option value="F">Femenino</mat-option>
+                      <mat-option value="M">Masculino</mat-option>
+                      <mat-option value="O">Otro</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td *ngIf="!usuario.admin">
+                  <mat-form-field>
+                    <mat-select name="rol" [(ngModel)]="usuario.rol">
+                      <mat-option value="ADMIN_ROLE">Admin</mat-option>
+                      <mat-option value="EST_ROLE">Estudiante</mat-option>
+                      <mat-option value="PROF_ROLE">Profesor</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td style="text-align: center;" *ngIf="!usuario.admin">
+                  <i
+                    class="fas fa-save icon icon-edit"
+                    (click)="guardarUsuario(usuario)"
+                  ></i>
+                  <i
+                    class="fas fa-trash icon icon-trash"
+                    (click)="delUsuario(usuario)"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- modal registro de usuarios  -->
+
+<div
+  class="container-modal"
+  [ngClass]="{ hiddenModal: _modalService.showModalAdd }"
+>
+  <div class="modal">
+    <section class="card-div">
+      <p class="title">Agrega un nuevo usuario</p>
+      <p class="subtitle">Ser bachiller</p>
+      <i class="fas fa-times icon icon-times" (click)="cerrarModal()"></i>
+
+      <hr />
+
+      <form
+        #form="ngForm"
+        class="formulario"
+        (ngSubmit)="enviarFormulario(form)"
+      >
+        <div class="container-form">
+          <!-- seccion personal -->
+
+          <div class="personal">
+            
+            <div class="input">
+              <label for="" [ngClass]="{'labelc': form.controls.nombre?.invalid}">Nombres</label>
+              <span *ngIf="form.controls.nombre?.invalid" class="required">*</span>
+              <div class="container-caja">
+                <i class="fas fa-user icon"></i>
+                <input
+                  type="text"
+                  class="caja"
+                  name="nombre"
+                  placeholder="Nombres Completos"
+                  autocomplete="off"
+                  ngModel
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="input">
+              <label for="" [ngClass]="{'labelc': form.controls.apellido?.invalid}">Apellidos</label> 
+              <span *ngIf="form.controls.apellido?.invalid" class="required">*</span>
+              <div class="container-caja">
+                <i class="fas fa-user icon"></i>
+                <input
+                  type="text"
+                  class="caja"
+                  name="apellido"
+                  placeholder="Apellidos Completos"
+                  autocomplete="off"
+                  ngModel
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="input">
+              <label for="" [ngClass]="{'labelc': form.controls.cedula?.invalid}">cedula</label>
+              <span *ngIf="form.controls.cedula?.invalid" class="required">*</span>
+              <div class="container-caja">
+                <i class="fas fa-fingerprint icon"></i>
+                <input
+                  type="text"
+                  class="caja"
+                  name="cedula"
+                  placeholder="Cedula"
+                  autocomplete="off"
+                  minlength="10"
+                  maxlength="10"
+                  ngModel
+                  required
+                />
+              </div>
+            </div>
+
+
+            <div class="input">
+              <mat-form-field class=" especiald">
+                <mat-label>Institucion</mat-label>
+                <mat-select [(value)]="selectedInstitucion">
+                  <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">{{institucion.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="input">
+              <label for="">Telefono</label>
+              <div class="container-caja">
+                <i class="fas fa-mobile icon"></i>
+                <input
+                  type="tel"
+                  class="caja"
+                  name="telefono"
+                  ngModel
+                  minlength="10"
+                  maxlength="10"
+                  placeholder="Telefono"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- seccion seguridad -->
+
+          <div class="seguridad">
+            <div class="input">
+              <label for="" [ngClass]="{'labelc': form.controls.email?.invalid}">Email</label>
+              <span *ngIf="form.controls.email?.invalid" class="required">*</span>
+              <div class="container-caja">
+                <i class="fas fa-envelope icon"></i>
+                <input
+                  type="email"
+                  matInput
+                  class="caja"
+                  name="email"
+                  ngModel
+                  placeholder="Email"
+                  autocomplete="off"
+                  [email]="true"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- <div class="input">
+              <label for="" [ngClass]="{'labelc': form.controls.password?.invalid}">Contraseña</label> 
+              <span *ngIf="form.controls.password?.invalid" class="required">*</span>
+              <div class="container-caja">
+                <i class="fas fa-lock icon"></i>
+                <input
+                  type="password"
+                  class="caja"
+                  name="password"
+                  ngModel
+                  placeholder="Contraseña"
+                  autocomplete="off"
+                  minlength="8"
+                  required
+                />
+              </div>
+            </div> -->
+
+            <div class="input">
+              <mat-form-field class="especiald">
+                <mat-label>Rol</mat-label>
+                <mat-select [(value)]="selectedRol">
+                  <mat-option value="EST_ROLE">Estudiante</mat-option>
+                  <mat-option value="ADMIN_ROLE">Admin</mat-option>
+                  <mat-option value="PROF_ROLE">Profesor</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="input especial">
+              <mat-form-field
+                class="especiald"
+                style="border: none;"
+                id="nacimiento"
+              >
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Fecha de nacimiento"
+                  name="fechaNac"
+                  ngModel
+                  autocomplete="off"
+                  [min]="minDate"
+                  [max]="maxDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="input">
+              <mat-form-field class=" especiald">
+                <mat-label>Genero</mat-label>
+                <mat-select [(value)]="selectedGenero">
+                  <mat-option value="M">Masculino</mat-option>
+                  <mat-option value="F">Femenino</mat-option>
+                  <mat-option value="O">Otro</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="botones">
+          <button type="submit" mat-raised-button class="btn-submit">
+            Registrar Usuario
+          </button>
+
+          <button
+            type="button"
+            mat-raised-button
+            class="btn-submit btn-cancel"
+            (click)="cerrarModal()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+

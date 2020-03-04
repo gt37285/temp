@@ -1,0 +1,65 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="container">
+    
+
+    <div class="container-exam">
+        <section class="head">
+            <div>
+                <h2 class="title">{{evaluaciones?.nombre |capitalizar}}</h2>
+                <p class="descripcion">{{evaluaciones?.descripcion}}</p>
+            </div>
+            <p class="tiempo">{{tiempo}}</p>
+        </section>
+
+        <section class="body">
+            <div class="bienvenida">
+                <p class="desc">Hola <strong>{{this.userService.user.nombre}} {{this.userService.user.apellido}}</strong> por favor completa la evaluacion, solo dispones de 1 intento.</p>
+            </div>
+
+            <form class="form-preguntas" #form="ngForm"  (ngSubmit)="resultado()">
+    
+                <div class="container-preguntas" *ngFor="let pregunta of evaluaciones.preguntas; let i = index">
+
+                    <article>
+                        <div class="pregunta">
+                            <span class="numero">{{pregunta.numero}}.</span>
+                            <p class="puntaje">( {{pregunta.puntaje}} puntos )</p>
+                            <p class="cuerpo" [innerHtml]="pregunta.pregunta"></p>
+                        </div>
+                    </article>
+
+                    <article class="container-respuesta" >
+                        <div *ngIf="pregunta.tipo=='D' || pregunta.tipo == 'A'">
+                            <mat-radio-button 
+                                class="radiobutton" 
+                                *ngFor="let respuesta of pregunta.respuestas"
+                                name="r{{i}}"
+                                [ngModel]="respuesta.estado"
+                                ngDefaultControl
+                                [value]="respuesta.estado">
+                                {{respuesta.nombre}}
+                            </mat-radio-button>
+                        </div>
+
+                        <div *ngIf="pregunta.tipo=='B'" class="container-check">
+                            <mat-checkbox 
+                                class="checkbutton"
+                                color="primary"
+                                *ngFor="let respuesta of pregunta.respuestas; let j = index"
+                                name="r{{i}}{{j}}"
+                                ngModel
+                                >
+                                {{respuesta.nombre}}
+                            </mat-checkbox>
+                        </div>
+
+                        
+                    </article>
+                </div>
+
+                <button type="submit" id="buttonform" mat-raised-button class="btn-submit">Enviar</button>
+            </form>
+        </section>
+    </div>
+</div>

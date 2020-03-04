@@ -1,0 +1,57 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.incx{
+    width: 150px !important;
+    display: inline-block;
+}
+
+.padre-inzx{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inzx{
+    width: 20% !important;
+}
+
+
+
+.file{
+    width: 190px;
+    padding: 0 .5em;
+    label{
+        span{
+            font-family: $fuente-raleway;
+            font-size: 12px;
+            color: #456c9e;
+        }
+    }
+}
+
+.icon{
+   color: #456c9e;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+}
+
+.fileupload{
+    width: 100px;
+    font-family: $fuente-raleway;
+    font-size: 14px;
+
+}

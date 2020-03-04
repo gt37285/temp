@@ -1,0 +1,322 @@
+<div class="container">
+  <app-breadcrumbs></app-breadcrumbs>
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div class="container-card">
+    <!-- formulario de perfil personal -->
+
+    <section class="card card-per">
+      <p class="title">Informacion Personal</p>
+      <p class="subtitle">ID Usuario: {{usuario._id}}</p>
+
+      <form
+        class="contenido"
+        #forma="ngForm"
+        (ngSubmit)="enviarFormPersonal(forma)"
+      >
+        <div class="container-form">
+          <div class="input per-div">
+            <label for="cedula">cedula de Identidad</label>
+            <div class="container-caja">
+              <i class="fas fa-fingerprint icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="cedula"
+                name="cedula"
+                [ngModel]="usuario.cedula"
+                disabled
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input per-div">
+            <label for="nombre">Nombre de usuario</label>
+            <div class="container-caja" id="nombre">
+              <i class="far fa-user icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="nombre"
+                name="nombre"
+                [ngModel]="usuario.nombre"
+                disabled
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input per-div">
+            <label for="apellido">Apellidos</label>
+            <div class="container-caja" id="apellido">
+              <i class="far fa-user icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="Apellido"
+                name="apellido"
+                [ngModel]="usuario.apellido"
+                disabled
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input per-div">
+            <label for="lugarNac">Lugar de nacimiento</label>
+            <div class="container-caja" id="lugarNac">
+              <i class="fas fa-street-view icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="Lugar de nacimiento"
+                name="lugarNac"
+                [(ngModel)]="usuario.lugarNac"
+              />
+            </div>
+          </div>
+
+          <div class="input per-div">
+            <mat-form-field class=" container-caja especial">
+              <mat-label>Genero</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option value="M">Masculino</mat-option>
+                <mat-option value="F">Femenino</mat-option>
+                <mat-option value="O">Otro</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="input per-div">
+            <mat-form-field
+              class="container-caja especial"
+              style="border: none;"
+              id="nacimiento"
+            >
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Fecha de nacimiento"
+                name="fechaNac"
+                [(ngModel)]="usuario.fechaNac"
+                [min]="minDate"
+                [max]="maxDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button type="submit" mat-stroked-button class="submit">
+          Registrar
+        </button>
+      </form>
+    </section>
+
+    <!-- formulario de visualizacion de imagen  -->
+
+    <section class="card card-img">
+      <p class="title">Imagen de usuario</p>
+      <p class="subtitle">ID Usuario: {{usuario._id}}</p>
+
+      <div class="preview">
+        <img [src]="usuario.img | imagen" alt="" *ngIf="!imagenTemp" />
+        <img [src]="imagenTemp" alt="" *ngIf="imagenTemp" />
+      </div>
+
+      <form action="">
+        <div class="botones">
+          <div class="file-div">
+            <input
+              type="file"
+              id="archi"
+              (change)="seleccionimg($event.target.files[0])"
+            />
+            <label for="archi">Imagen</label>
+          </div>
+
+          <button
+            type="submit"
+            mat-stroked-button
+            (click)="cargarImg()"
+            class="submit sub-img"
+          >
+            Cargar Imagen
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- formulario de perfil de direcciones -->
+
+    <section class="card card-dir">
+      <p class="title">Direcciones</p>
+      <p class="subtitle">Configurar Direcciones</p>
+
+      <form
+        class="contenido"
+        #form="ngForm"
+        (ngSubmit)="enviarFormaDirecciones(form)"
+      >
+        <div class="container-form">
+          <div class="input dir-div">
+            <label for="ciudad">Ciudad</label>
+            <div class="container-caja" id="ciudad">
+              <i class="fas fa-university icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="ciudad"
+                name="ciudad"
+                [ngModel]="usuario.ciudad"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input dir-div">
+            <label for="mainstreet">Calle principal</label>
+            <div class="container-caja" id="mainstreet">
+              <i class="fas fa-road icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="Calle principal"
+                name="callePrincipal"
+                [ngModel]="usuario.callePrincipal"
+              />
+            </div>
+          </div>
+
+          <div class="input dir-div dir-div-house">
+            <label for="secondstreet">Calle secundaria</label>
+            <div class="container-caja" id="secondstreet">
+              <i class="fas fa-road icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="Calle secundaria"
+                name="calleSecundaria"
+                [ngModel]="usuario.calleSecundaria"
+              />
+            </div>
+          </div>
+
+          <div class="input dir-div dir-div-house">
+            <label for="numHouse">Numero de casa</label>
+            <div class="container-caja" id="numHouse">
+              <i class="fas fa-home icon"></i>
+              <input
+                type="text"
+                class="caja"
+                placeholder="Numero de casa"
+                name="numCasa"
+                [ngModel]="usuario.numCasa"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" mat-stroked-button class="submit">
+          Registrar
+        </button>
+      </form>
+    </section>
+
+    <!-- formulario configuracion de seguridad -->
+
+    <section class="card card-secure">
+      <p class="title">Configuracion de seguridad</p>
+      <p class="subtitle">Cambiar contraña</p>
+
+      <form
+        class="contenido"
+        [formGroup]="formSecure"
+        (ngSubmit)="enviarFormaSecure()"
+      >
+        <div class="container-form">
+
+          <div class="input secure-div ">
+            <label for="mainstreet">Contraseña</label>
+            <div class="container-caja" id="mainstreet">
+              <i class="fas fa-key icon"></i>
+              <input type="password" class="caja" placeholder="Contraseña Anterior" name="password" formControlName="passwordAnt" required />
+            </div>
+          </div>
+
+          <div class="input secure-div ">
+            <label for="mainstreet2"> Nueva Contraseña</label>
+            <div class="container-caja" id="mainstreet2">
+              <i class="fas fa-key icon"></i>
+              <input
+                type="password"
+                class="caja"
+                placeholder="Nueva Contraseña"
+                name="password"
+                formControlName="password"
+                required
+              />
+            </div>
+          </div>
+
+          
+
+          <div class="input secure-div">
+            <label for="mainstreet3">Verificación de Contraseña</label>
+            <div class="container-caja" id="mainstreet3">
+              <i class="fas fa-lock-open icon"></i>
+              <input
+                type="password"
+                class="caja"
+                placeholder="Repite la contraseña"
+                name="password2"
+                formControlName="password2"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" mat-stroked-button class="submit">
+          Registrar
+        </button>
+      </form>
+    </section>
+
+
+    <section class="card card-secure-email">
+      <p class="title">Configuracion de seguridad</p>
+      <p class="subtitle">Cambiar email</p>
+    
+      <form class="contenido" #formEmail="ngForm" (ngSubmit)="cambiarEmail(formEmail)">
+        <div class="container-form">
+          <div class="input secure-div">
+            <label for="ciudad">Email</label>
+            <div class="container-caja" id="ciudad">
+              <i class="fas fa-university icon"></i>
+              <input type="email" class="caja" placeholder="Correo" name="email" [(ngModel)]="usuario.email" required />
+            </div>
+          </div>
+    
+          <div class="input secure-div ">
+            <label for="mainstreet">Contraseña</label>
+            <div class="container-caja" id="mainstreet">
+              <i class="fas fa-key icon"></i>
+              <input type="password" class="caja" placeholder="Contraseña Anterior" name="password"
+                [(ngModel)]="usuario.passwordAnt" required />
+            </div>
+          </div>
+        </div>
+    
+        <button type="submit" mat-stroked-button class="submit">
+          Registrar
+        </button>
+      </form>
+    </section>
+  </div>
+</div>

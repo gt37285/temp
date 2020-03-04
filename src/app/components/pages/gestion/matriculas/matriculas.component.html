@@ -1,0 +1,73 @@
+<div class="container">
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <section class="container-moduloz card animated fadeIn">
+        <div>
+            <div class="opciones-demo">
+                <p class="registrados">
+                    Estudiantes ( <span>{{ total }}</span> )
+                </p>
+                <div class="paginacion">
+                    <div class="regestro">
+                        <div class="input selectedModulo">
+                            <mat-form-field>
+                                <mat-label>Curso</mat-label>
+                                <mat-select [(value)]="selectedCursoObj">
+    
+                                    <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos"
+                                        (click)="listarEstudiantes(curso._id)">
+                                        {{curso.nombre}}
+                                    </mat-option>
+    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="noencontrado" *ngIf="total <= 0">
+                no se encontraron estudiantes pendientes de aprovación
+            </div>
+    
+    
+            <div style="overflow-x: auto;" *ngIf="total > 0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cedula</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="animated fadeIn">
+
+                        <tr *ngFor="let matricula of estudiantes">
+                            
+                            <td style="text-align: center;">
+                                <img class="img" [src]="matricula.usuario.img | imagen" alt="estudiante_img" />
+                            </td>
+                            
+                            <td>{{matricula.usuario.nombre | capitalizar}}</td>
+                            <td>{{matricula.usuario.apellido | capitalizar}}</td>
+                            <td>{{matricula.usuario.cedula}}</td>
+                            <td>{{matricula.usuario.telefono | telefono}}</td>
+                            <td>{{matricula.usuario.email}}</td>
+    
+                            <td style="text-align: center;">
+                                <i class="fas fa-check icon icon-edit" (click)="aceptar(matricula)">
+                                </i>
+                                <i class="fas fa-trash icon icon-delete" (click)="rechazar(matricula)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

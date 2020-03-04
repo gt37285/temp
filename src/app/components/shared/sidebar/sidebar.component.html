@@ -1,0 +1,67 @@
+<div class="container" #sidebar>
+  <nav class="sidebar">
+    <ul class="menu">
+      <li class="item">
+        <div class="user-profile" (click)="desplegar(icon, child)">
+          <div class="profile prof" mat-button>
+            <div class="img">
+              <img [src]="usuario.img | imagen" alt="" />
+
+              <span>{{ usuario.nombre | nick: usuario.apellido }}</span>
+            </div>
+            <i class="fas fa-chevron-right icon-chevron" #icon></i>
+          </div>
+          <ul #child class="menu_child">
+            <li class="item_child">
+              <a routerLink="/aula/perfil" routerLinkActive="active" class="enlace_child">
+                <i class="fas fa-user icon"></i>
+                <span>Perfil</span>
+              </a>
+            </li>
+            <!-- <li class="item_child">
+              <a class="enlace_child">
+                <i class="fas fa-cogs icon"></i>
+                <span>Configuraciones</span>
+              </a>
+            </li>
+            <li class="item_child">
+              <a class="enlace_child">
+                <i class="fas fa-palette icon"></i>
+                <span>Temas</span>
+              </a>
+            </li> -->
+            <li class="item_child">
+              <p class="enlace_child cursor" (click)="_service.logout()">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <span>Cerrar Sesion</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <div class="item-mod">
+        <li class="item " *ngFor="let item of items">
+          <div class="user-profile user-mod" (click)="desplegar(icono, hijo)">
+            <div class="profile profile-mod" mat-button>
+              <div class="img">
+                <i class="{{ item.icono }} icon icon-mod"></i>
+                <span class="titulo-mod">{{ item.titulo }}</span>
+              </div>
+              <i class="fas fa-chevron-right icon-chevron" #icono></i>
+            </div>
+
+            <ul #hijo class="menu_child">
+              <li class="item_child" *ngFor="let subitem of item.submenu">
+                <a routerLink="{{ subitem.url }}" routerLinkActive="active" class="enlace_child">
+                  <i class="{{ subitem.icono }} icon"></i>
+                  <span>{{ subitem.titulo }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </div>
+    </ul>
+  </nav>
+</div>

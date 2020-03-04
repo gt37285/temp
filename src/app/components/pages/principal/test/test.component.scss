@@ -1,0 +1,158 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-exam{
+    width: 60%;
+    border: solid #c9c9c9ce 1px;
+    box-shadow: 1px 3px 5px #c9c9c98a;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.head,.body{
+    padding: 2em 7em;
+}
+
+.head{
+    background-color: #0078D7;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4em;
+
+    .title{
+        margin-top: 2em;
+        font-family: $fuente-nunito;
+        font-size: 27px;
+    }
+
+    .descripcion{
+        font-family: $fuente-raleway;
+        font-size: 14px;
+        margin-top: .5em;
+    }
+
+    .tiempo{
+        font-size: 17px;
+    }
+}
+
+.body{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 3em 0;
+
+    strong{
+        font-family: $fuente-nunito;
+        font-size: 16px;
+    }
+
+    .bienvenida{
+        font-family: $fuente-raleway;
+        font-size: 17px;
+        margin-bottom: 5em;
+    }
+
+    .pregunta{
+        font-family: $fuente-nunito;
+        font-size: 14px;
+        margin-bottom: 4em;
+
+        .numero{
+            font-weight: bold;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .cuerpo{
+            display: inline-block;
+            text-align: justify;
+            margin-left: 1em;
+        }
+
+        .puntaje{
+            margin-left: 1em;
+            display: inline;
+            display: inline-block;
+            font-family: $fuente-raleway;
+            font-size: 12px;
+        }
+
+    }
+
+    form{
+        width: 100%;
+    }
+
+    .container-preguntas{
+        width: 100%;
+        // border: solid orange 1px;
+    }
+
+    .container-respuesta{
+        width: 100%;
+        margin: 2em 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+.container-check{
+    // margin: 2em 0;
+
+    display: block;
+}
+
+
+.radiobutton,.checkbutton{
+    // margin: 2em;
+    margin-left: 2em;
+    padding: 1em 0;
+    font-family: $fuente-raleway;
+    font-size: 15px;
+    display: block;
+}
+
+
+.btn-submit{
+    background-color: #0078D7;
+    color: #fff;
+    width: 200px;
+    border-radius: 0;
+    font-family: $fuente-raleway;
+    font-size: 15px;
+    margin: 5em 0 3em 0;
+    padding: 7px;
+
+    &:hover{
+        background-color: #1460C5;
+    }
+}
+
+
+@media screen and ( max-width:1400px ){
+    .body{
+        .bienvenida, strong{
+            font-size: 13px;
+        }  
+    }
+
+    .radiobutton,.checkbutton{
+        font-size: 13px;
+    }
+}

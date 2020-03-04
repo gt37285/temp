@@ -1,0 +1,175 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+.container {
+  background-color: #2a3c50;
+  width: 100%;
+  color: #fff;
+}
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.5em 0.5em;
+}
+
+.hr_vt {
+  border: none;
+  border-left: solid 1px #ccc;
+  height: 6vh;
+  margin: 0 1em;
+}
+
+.direcciones {
+  margin: 1em 2em;
+}
+
+.lista {
+  list-style: none;
+  .item {
+    font-family: $fuente-raleway;
+    position: relative;
+    margin: 0.5em 0;
+
+    .address {
+      font-size: 11px;
+      margin-left: 3em;
+      padding: 1em 0;
+    }
+
+    .title,
+    .subtitle {
+      display: block;
+    }
+
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 30%;
+    }
+  }
+}
+
+.logos {
+  display: flex;
+  margin: 4em 3em;
+  order: 3;
+
+  .logo {
+    width: 95px;
+    display: block;
+  }
+
+  .logo_ec {
+    display: block;
+    width: 35px;
+  }
+}
+
+.about {
+  font-family: $fuente-raleway;
+  width: 250px;
+  margin: 2em auto;
+  order: 2;
+
+  .title {
+    font-size: 13px;
+    margin-bottom: 1.5em;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    margin-bottom: 1em;
+    text-align: justify;
+  }
+
+  .redes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon_redes {
+      padding: 1em 0;
+      &:hover {
+        color: #8a8181;
+      }
+    }
+  }
+}
+
+.ayuda {
+  width: 170px;
+  .item {
+    padding: 0.5em;
+    font-size: 11px;
+
+    .icon_ayuda {
+      font-size: 13px;
+      opacity: 1;
+      padding-right: 1em;
+      transition: all 0.5s ease-in-out;
+    }
+    &:hover {
+      .icon_ayuda {
+        opacity: 0;
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.enlace {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1em 2em;
+
+  .copyright {
+    font-size: 11px;
+  }
+
+  .redes {
+    .icon_redes {
+      color: rgb(49, 90, 143);
+    }
+  }
+}
+
+@media screen and(min-width: 800px) {
+  .hr {
+    display: none;
+  }
+  .logos {
+    order: 2;
+  }
+
+  .ayuda {
+    .item {
+      .icon_ayuda {
+        opacity: 1;
+      }
+    }
+  }
+
+  .direcciones {
+    order: 1;
+  }
+
+  .about {
+    order: 3;
+    .title {
+      text-align: left;
+    }
+    margin: unset;
+  }
+}

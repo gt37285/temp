@@ -1,0 +1,105 @@
+<div class="container fadeIn">
+  <!-- header -->
+
+  <div class="card">
+    <img [src]="curso?.img | imagen: 'cursos'" class="img-curso img" alt="" />
+    <div class="profesor">
+      <img [src]="curso?.usuario?.img | imagen" class="img img-user" alt="" />
+
+      <div class="info">
+        <p class="nombre">
+          {{ curso?.usuario?.nombre | nick: curso?.usuario?.apellido }}
+        </p>
+        <p class="nombre-curso">Curso: {{ curso?.nombre | capitalizar }}</p>
+      </div>
+    </div>
+    <button class="registro" mat-stroked-button (click)="registro()" *ngIf="!matriculado">Registrarse</button>
+    <button class="registro" mat-stroked-button (click)="irAcurso()" *ngIf="matriculado">Ingresar</button>
+  </div>
+  
+  <!-- cabezera  -->
+  <div class="header">
+    <app-breadcrumbs></app-breadcrumbs>
+    <div class="container-head">
+      <p class="title">
+        Curso: {{ curso?.nombre | capitalizar }}
+        <small class="fecha">( {{ curso?.fecha | date }} )</small>
+      </p>
+      <p class="descripcion">{{ curso?.descripcion }}</p>
+
+      <div class="prof"></div>
+    </div>
+  </div>
+
+  <!-- end header  -->
+
+  <div class="requerimentos tarjeta" >
+    <div class="que-aprenderas w-30 ">
+      <p class="title">¿Que aprenderas?</p>
+      <hr />
+
+      <ul>
+        <div class="item" *ngFor="let objetivo of objetivos">
+          <i class="far fa-check-circle icon"></i>
+          <p class="texto">{{ objetivo.nombre | capitalizar }}</p>
+        </div>
+      </ul>
+    </div>
+
+    <div class="conocimientos w-30 ">
+      <p class="title">¿Que conocimientos necesitas?</p>
+      <hr />
+
+      <ul>
+        <div class="item" *ngFor="let req of requerimentos">
+          <i class="far fa-check-circle icon"></i>
+          <p class="texto">{{ req.nombre | capitalizar }}</p>
+        </div>
+      </ul>
+    </div>
+
+    <div class="nivel w-30 ">
+      <p class="title">Nivel</p>
+      <hr />
+      <p class="texto" style="margin: 1em 0">
+        {{ curso?.dificultad | capitalizar }}
+      </p>
+      <div class="container-level ">
+        <div class="level {{curso?.dificultad}}"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- temario  -->
+  <div class="temario tarjeta" *ngIf="curso?.modulos?.length > 0">
+    <p class="title">Temario</p>
+    <hr />
+
+    <!-- modulos  -->
+
+    <div class="modulos" *ngFor="let modulo of curso?.modulos">
+      <div class="info">
+        <p class="nombre">{{modulo.nombre | capitalizar}}</p>
+        <p class="fecha">{{modulo.fecha | date}}</p>
+      </div>
+
+      <!-- clases  -->
+
+      <div class="clases" *ngFor="let clase of modulo.clases">
+        <div class="info-clase">
+          <div class="right">
+            <i class="far fa-play-circle icon"></i>
+            <p class="nombre">{{clase.nombre | capitalizar}}</p>
+          </div>
+          <div class="left">
+            <p class="fecha">{{clase.fecha | date}}</p>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>

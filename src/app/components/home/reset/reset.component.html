@@ -1,0 +1,74 @@
+<div class="container fadeIn">
+
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <main class="main">
+    <section class="logo">
+      <p class="title">Bachiller</p>
+      <p class="subtitle">La mejor experiencia</p>
+    </section>
+
+    <section class="logo-web">
+      <p class="title">Forgot</p>
+      <p class="subtitle">Olvidaste tu contraseña?</p>
+    </section>
+
+    <div class="stteper-container contenedor-site">
+      <mat-vertical-stepper linear="false" #stepper>
+        <mat-step [stepControl]="firstFormGroup" >
+          <form [formGroup]="firstFormGroup" (ngSubmit)="enviarEmail()">
+            <ng-template matStepLabel>Ingresa tu correo</ng-template>
+            <mat-form-field>
+              <mat-label>email</mat-label>
+              <input matInput type="email" placeholder="xyz@gmail.com" formControlName="email" autocomplete="off" required>
+            </mat-form-field>
+            <div>
+              <button type="submit" matStepperNext mat-button >Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" >
+          <form [formGroup]="secondFormGroup" (ngSubmit)="enviarCode()">
+            <ng-template matStepLabel>Ingresa el codigo</ng-template>
+            <mat-form-field>
+              <mat-label>code</mat-label>
+              <input matInput formControlName="code"  placeholder="123456" autocomplete="off" required>
+            </mat-form-field>
+            <div>
+              <button type="submit" mat-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="passwordFormGroup">
+          <form [formGroup]="passwordFormGroup" (ngSubmit)="changePass()">
+            <ng-template matStepLabel>cambia tu contraseña</ng-template>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" autocomplete="off" placeholder="contraseña" required>
+            </mat-form-field>
+            <div>
+              <button type="submit" mat-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+        <mat-step editable="false">
+          <ng-template matStepLabel>Signin</ng-template>
+          <div>
+            <button mat-button (click)="signin()">Signin</button>
+            <button mat-button (click)="stepper.reset()">Volver a intentarlo</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+
+      <section class="validacion">
+        <p class="container-enlace">
+          <a class="enlace" [routerLink]="['/signin']">Tienes una cuenta?</a>
+        </p>
+      </section>
+    </div>
+
+  </main>
+</div>
