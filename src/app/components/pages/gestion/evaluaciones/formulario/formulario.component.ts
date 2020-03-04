@@ -373,7 +373,6 @@ export class FormularioComponent implements OnInit {
     }).then(data => {
       if (data.value) {
         (<FormArray> this.formuniq.get('respuestas')).removeAt(index)
-        this.respuestasFormUnica()
       }
     });
     
@@ -391,7 +390,6 @@ export class FormularioComponent implements OnInit {
     }).then(data => {
       if (data.value) {
         (<FormArray> this.form.get('respuestas')).removeAt(index)
-        this.respuestasFormMultiple()
       }
     });
     
@@ -638,7 +636,6 @@ export class FormularioComponent implements OnInit {
 
 
   respuestasFormUnica(){
-
 
     if( this.formuniq.invalid ){
         return Swal.fire({

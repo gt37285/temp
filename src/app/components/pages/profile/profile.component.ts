@@ -224,6 +224,7 @@ export class ProfileComponent implements OnInit {
         this.usuario.email = this.formSecure.value.email;
         this.usuario.password = this.formSecure.value.password;
         this.usuario.passwordAnt = this.formSecure.value.passwordAnt;
+        this.usuario.admin = false
     
         this.loading = true
     

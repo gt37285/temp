@@ -212,9 +212,14 @@ table {
 
 
 .registrarCurso{
-   grid-column: 1/ 3;
+  grid-column: 1/ 3;
   grid-row: 1/2;
   height: 600px;
+}
+
+.registro-cur{
+  grid-column: 1/ 3;
+  grid-row: 1/2;
 }
 
 .container-table{
@@ -227,12 +232,21 @@ table {
 .container-modulo{
   grid-column: 1/4;
   grid-row: 1/-1;
-   height: 600px !important;
+   height: 625px !important;
+}
+
+.container-modulocc{
+  min-height: 400px;
+  height: auto !important;
 }
 
 .container-moduloz{
   grid-column: 1/4;
   grid-row: 1/-1;
+}
+
+.registro-obj{
+  grid-column: 4/-1;
 }
 
 
@@ -260,7 +274,7 @@ table {
 
 
 
-.registrarCurso,.registraModulo,.registraClase,.registraRecurso{
+.registrarCurso,.registro-cur,.registraModulo,.registro-obj,.registraClase,.registraRecurso{
   width: 100%;
   .title{
     font-family: $fuente-raleway;

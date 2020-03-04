@@ -13,6 +13,7 @@ export class ReportesComponent {
   private id:String = ''
   public evaluaciones:evaluacionModel[] = []
   public total:Number = 0
+  public loading:Boolean = false
 
   constructor(
     private activatedRouter:ActivatedRoute,
@@ -20,11 +21,13 @@ export class ReportesComponent {
   ) { 
     this.activatedRouter.params.subscribe((data:any) => {
       this.id = data.id
+      this.loading = true
       this.service.listarReportes(data.id)
         .subscribe((evaluacion:any) => {
           console.log(evaluacion);
           this.evaluaciones = evaluacion
           this.total = evaluacion.length
+          this.loading = false
         })
     })
   }

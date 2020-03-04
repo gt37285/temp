@@ -1,5 +1,6 @@
 export class UsuarioModel {
   constructor(
+    public admin: boolean,
     public nombre: string,
     public nick: string,
     public apellido: string,

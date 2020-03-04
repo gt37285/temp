@@ -20,6 +20,7 @@ import {MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS} from '@angular/material/radio
 import { HttpClientModule} from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReportesComponent } from './evaluaciones/reportes/reportes.component';
+import { ObjetivosRequerimentosComponent } from './cursos-prof/objetivos-requerimentos/objetivos-requerimentos.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ReportesComponent } from './evaluaciones/reportes/reportes.component';
     RechazadosComponent,
     EvaluacionesComponent,
     FormularioComponent,
-    ReportesComponent
+    ReportesComponent,
+    ObjetivosRequerimentosComponent
   ],
   imports: [
     CommonModule,

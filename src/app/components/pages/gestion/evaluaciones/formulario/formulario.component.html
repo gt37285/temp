@@ -99,7 +99,7 @@
                 </div>
                 
                 <div class="container-respuestas">
-                    <div formArrayName="respuestas"  class="classrespuestas" *ngFor="let repuesta of form.get('respuestas')['controls']; let i = index" >
+                    <div formArrayName="respuestas"  class="classrespuestas" *ngFor="let repuesta of formuniq.get('respuestas')['controls']; let i = index" >
                         <div [formGroupName]="i" class="item-respuesta">
                             <input type="text" formControlName="nombre" placeholder="Respuesta {{i+1}}" required>
                             <i class="fas fa-trash-alt icon-res" (click)="eliminarRespuestauniq(i)"></i>

@@ -5,13 +5,7 @@
     <section class="search">
       <div class="container-caja">
         <i class="fas fa-search icon"></i>
-        <input
-          #input
-          type="text"
-          class="caja"
-          (keyup)="buscarUsuario(input.value)"
-          placeholder="Buscar usuarios"
-        />
+        <input #input type="text" class="caja" (keyup)="buscarUsuario(input.value)" placeholder="Buscar usuarios" />
       </div>
     </section>
 
@@ -27,17 +21,11 @@
             <div class="regestro">
               <i class="fas fa-user-plus icon iconadd" (click)="addUser()"></i>
             </div>
-            <i
-              class="fas fa-chevron-circle-left icon icon-pag"
-              (click)="cambiardesde(-6)"
-            ></i>
-            <i
-              class="fas fa-chevron-circle-right icon icon-pag"
-              (click)="cambiardesde(6)"
-            ></i>
+            <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesde(-6)"></i>
+            <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesde(6)"></i>
           </div>
         </div>
-        <div style="overflow-x: auto;">
+        <div style="overflow-x: auto;" class="scrolltable">
           <table class="table">
             <thead>
               <tr>
@@ -55,26 +43,23 @@
             </thead>
             <tbody class="animated fadeIn">
               <tr *ngFor="let usuario of usuarios">
-                
-                <td style="text-align: center;"  *ngIf="!usuario.admin">
-                  <img
-                    class="img"
-                    [src]="usuario.img | imagen"
-                    alt=""
-                    (click)="mostrarModal(usuario)"
-                  />
+
+                <td style="text-align: center;" *ngIf="!usuario.admin">
+                  <img class="img" [src]="usuario.img | imagen" alt="" (click)="mostrarModal(usuario)" />
                 </td>
 
 
                 <td *ngIf="!usuario.admin">
                   <div class="containercaja">
-                    <input type="text" class="caja" [value]="usuario.nombre" name="nombre" [(ngModel)]="usuario.nombre ">
+                    <input type="text" class="caja" [value]="usuario.nombre" name="nombre"
+                      [(ngModel)]="usuario.nombre ">
                   </div>
                 </td>
 
                 <td *ngIf="!usuario.admin">
                   <div class="containercaja">
-                    <input type="text" class="caja" [value]="usuario.apellido" name="apellido" [(ngModel)]="usuario.apellido">
+                    <input type="text" class="caja" [value]="usuario.apellido" name="apellido"
+                      [(ngModel)]="usuario.apellido">
                   </div>
                 </td>
 
@@ -86,7 +71,8 @@
 
                 <td *ngIf="!usuario.admin">
                   <div class="containercaja">
-                    <input type="text" class="caja" [value]="usuario.cedula " name="cedula" [(ngModel)]="usuario.cedula" maxlength="10">
+                    <input type="text" class="caja" [value]="usuario.cedula " name="cedula" [(ngModel)]="usuario.cedula"
+                      maxlength="10">
                   </div>
                 </td>
 
@@ -94,11 +80,12 @@
 
                   <mat-form-field>
                     <mat-select name="institucion" [(ngModel)]="usuario.institucion">
-                      <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">{{institucion.nombre}}</mat-option>
+                      <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">
+                        {{institucion.nombre}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </td>
-                
+
                 <td *ngIf="!usuario.admin">
                   <mat-form-field>
                     <mat-select name="rol" [(ngModel)]="usuario.estado">
@@ -126,14 +113,8 @@
                   </mat-form-field>
                 </td>
                 <td style="text-align: center;" *ngIf="!usuario.admin">
-                  <i
-                    class="fas fa-save icon icon-edit"
-                    (click)="guardarUsuario(usuario)"
-                  ></i>
-                  <i
-                    class="fas fa-trash icon icon-trash"
-                    (click)="delUsuario(usuario)"
-                  ></i>
+                  <i class="fas fa-save icon icon-edit" (click)="guardarUsuario(usuario)"></i>
+                  <i class="fas fa-trash icon icon-trash" (click)="delUsuario(usuario)"></i>
                 </td>
               </tr>
             </tbody>
@@ -146,10 +127,7 @@
 
 <!-- modal registro de usuarios  -->
 
-<div
-  class="container-modal"
-  [ngClass]="{ hiddenModal: _modalService.showModalAdd }"
->
+<div class="container-modal" [ngClass]="{ hiddenModal: _modalService.showModalAdd }">
   <div class="modal">
     <section class="card-div">
       <p class="title">Agrega un nuevo usuario</p>
@@ -158,47 +136,29 @@
 
       <hr />
 
-      <form
-        #form="ngForm"
-        class="formulario"
-        (ngSubmit)="enviarFormulario(form)"
-      >
+      <form #form="ngForm" class="formulario" (ngSubmit)="enviarFormulario(form)">
         <div class="container-form">
           <!-- seccion personal -->
 
           <div class="personal">
-            
+
             <div class="input">
               <label for="" [ngClass]="{'labelc': form.controls.nombre?.invalid}">Nombres</label>
               <span *ngIf="form.controls.nombre?.invalid" class="required">*</span>
               <div class="container-caja">
                 <i class="fas fa-user icon"></i>
-                <input
-                  type="text"
-                  class="caja"
-                  name="nombre"
-                  placeholder="Nombres Completos"
-                  autocomplete="off"
-                  ngModel
-                  required
-                />
+                <input type="text" class="caja" name="nombre" placeholder="Nombres Completos" autocomplete="off" ngModel
+                  required />
               </div>
             </div>
 
             <div class="input">
-              <label for="" [ngClass]="{'labelc': form.controls.apellido?.invalid}">Apellidos</label> 
+              <label for="" [ngClass]="{'labelc': form.controls.apellido?.invalid}">Apellidos</label>
               <span *ngIf="form.controls.apellido?.invalid" class="required">*</span>
               <div class="container-caja">
                 <i class="fas fa-user icon"></i>
-                <input
-                  type="text"
-                  class="caja"
-                  name="apellido"
-                  placeholder="Apellidos Completos"
-                  autocomplete="off"
-                  ngModel
-                  required
-                />
+                <input type="text" class="caja" name="apellido" placeholder="Apellidos Completos" autocomplete="off"
+                  ngModel required />
               </div>
             </div>
 
@@ -207,17 +167,8 @@
               <span *ngIf="form.controls.cedula?.invalid" class="required">*</span>
               <div class="container-caja">
                 <i class="fas fa-fingerprint icon"></i>
-                <input
-                  type="text"
-                  class="caja"
-                  name="cedula"
-                  placeholder="Cedula"
-                  autocomplete="off"
-                  minlength="10"
-                  maxlength="10"
-                  ngModel
-                  required
-                />
+                <input type="text" class="caja" name="cedula" placeholder="Cedula" autocomplete="off" minlength="10"
+                  maxlength="10" ngModel required />
               </div>
             </div>
 
@@ -226,7 +177,8 @@
               <mat-form-field class=" especiald">
                 <mat-label>Institucion</mat-label>
                 <mat-select [(value)]="selectedInstitucion">
-                  <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">{{institucion.nombre}}
+                  <mat-option [value]="institucion.nombre" *ngFor="let institucion of instituciones">
+                    {{institucion.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -236,16 +188,8 @@
               <label for="">Telefono</label>
               <div class="container-caja">
                 <i class="fas fa-mobile icon"></i>
-                <input
-                  type="tel"
-                  class="caja"
-                  name="telefono"
-                  ngModel
-                  minlength="10"
-                  maxlength="10"
-                  placeholder="Telefono"
-                  autocomplete="off"
-                />
+                <input type="tel" class="caja" name="telefono" ngModel minlength="10" maxlength="10"
+                  placeholder="Telefono" autocomplete="off" />
               </div>
             </div>
           </div>
@@ -258,17 +202,8 @@
               <span *ngIf="form.controls.email?.invalid" class="required">*</span>
               <div class="container-caja">
                 <i class="fas fa-envelope icon"></i>
-                <input
-                  type="email"
-                  matInput
-                  class="caja"
-                  name="email"
-                  ngModel
-                  placeholder="Email"
-                  autocomplete="off"
-                  [email]="true"
-                  required
-                />
+                <input type="email" matInput class="caja" name="email" ngModel placeholder="Email" autocomplete="off"
+                  [email]="true" required />
               </div>
             </div>
 
@@ -302,25 +237,10 @@
             </div>
 
             <div class="input especial">
-              <mat-form-field
-                class="especiald"
-                style="border: none;"
-                id="nacimiento"
-              >
-                <input
-                  matInput
-                  [matDatepicker]="picker"
-                  placeholder="Fecha de nacimiento"
-                  name="fechaNac"
-                  ngModel
-                  autocomplete="off"
-                  [min]="minDate"
-                  [max]="maxDate"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
+              <mat-form-field class="especiald" style="border: none;" id="nacimiento">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" name="fechaNac" ngModel
+                  autocomplete="off" [min]="minDate" [max]="maxDate" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
@@ -343,12 +263,7 @@
             Registrar Usuario
           </button>
 
-          <button
-            type="button"
-            mat-raised-button
-            class="btn-submit btn-cancel"
-            (click)="cerrarModal()"
-          >
+          <button type="button" mat-raised-button class="btn-submit btn-cancel" (click)="cerrarModal()">
             Cancelar
           </button>
         </div>
@@ -356,4 +271,3 @@
     </section>
   </div>
 </div>
-

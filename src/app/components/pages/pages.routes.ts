@@ -35,6 +35,9 @@ import { ResultadoComponent } from './principal/test/resultado/resultado.compone
 import { EvaluacionesGuard } from 'src/app/guards/evaluaciones.guard';
 import { ReportesComponent } from './gestion/evaluaciones/reportes/reportes.component';
 import { PreguntasGuard } from 'src/app/guards/preguntas.guard';
+import { ObjetivosRequerimentosComponent } from './gestion/cursos-prof/objetivos-requerimentos/objetivos-requerimentos.component';
+import { PasswordComponent } from './colecciones/password/password.component';
+import { SuperadminGuard } from 'src/app/guards/superadmin.guard';
 
 const routes: Routes = [
 
@@ -105,6 +108,12 @@ const routes: Routes = [
     data: { titulo: "Gestion de usuarios", father: "Colecciones" }
   },
   {
+    path: "usuarios/passwords",
+    component: PasswordComponent,
+    canActivate: [AdminGuard,SuperadminGuard],
+    data: { titulo: "Gestion de Contraseñas", father: "Colecciones" }
+  },
+  {
     path: "institucion",
     component: InstitucionComponent,
     canActivate: [AdminGuard],
@@ -130,6 +139,12 @@ const routes: Routes = [
     component: ClaseComponent,
     canActivate: [ProfGuard],
     data: { titulo: "Gestion de Clases", father: "Gestion"}
+  },
+  {
+    path: "prof/cursos/objetivosRequisitos/:id",
+    component: ObjetivosRequerimentosComponent,
+    canActivate: [ProfGuard],
+    data: { titulo: "Gestion de Cursos", father: "Gestion"}
   },
   {
     path: "prof/recursos",

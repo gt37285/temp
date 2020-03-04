@@ -18,7 +18,7 @@ export class UsuariosService {
   public user: UsuarioModel;
   public menu: any[] = [];
   public accesos: any[] = []
-  public codigo:string  =''
+  public codigo: string = ''
 
   constructor(
     private _http: HttpClient,
@@ -44,7 +44,7 @@ export class UsuariosService {
         this.menu = data.menu;
         this.accesos = data.accesos
 
-        if(!data.user.estado){
+        if (!data.user.estado) {
           Swal.fire({
             title: "Accedo denegado",
             text: 'Tu usuario actualmente esta inactivo, por favor contacta un administrador.',
@@ -54,23 +54,29 @@ export class UsuariosService {
           this.logout()
         }
         return data.user.rol;
-        
+
       }),
 
       catchError(err => {
-        Swal.fire({
-          title: "No puedes acceder!",
-          text: err.error.message,
-          icon: "error",
-          confirmButtonText: "Cool"
-        });
-        return Observable.throw(err)
+
+        if(err.status == 0){
+          this.logout()
+        }else{
+          console.log(err)
+         return  Swal.fire({
+            title: "No puedes acceder!",
+            text: err.error.message,
+            icon: "error",
+            confirmButtonText: "Cool"
+          });
+        }
+       
       })
     );
   }
 
   isAutenticated() {
-    return  this.isAutenticated && this.token.length > 5 ? true : false;
+    return this.isAutenticated && this.token.length > 5 ? true : false;
   }
 
   logout() {
@@ -80,7 +86,7 @@ export class UsuariosService {
     sessionStorage.clear()
     this._router.navigate(["/"]);
     return this._http.get(`${URL_SERVICES}/auth/logout`)
-    .subscribe(data => data)
+      .subscribe(data => data)
   }
 
   cargarStorage() {
@@ -88,7 +94,7 @@ export class UsuariosService {
       this.token = localStorage.getItem("token");
       this.user = JSON.parse(localStorage.getItem("usuario"));
       this.menu = JSON.parse(localStorage.getItem("menu"));
-      if(localStorage.getItem("accesos")){
+      if (localStorage.getItem("accesos")) {
         this.accesos = JSON.parse(localStorage.getItem("accesos"))
       }
     } else {
@@ -102,7 +108,7 @@ export class UsuariosService {
     token: string,
     usuario: UsuarioModel,
     menu: any[],
-    accesos:any[]
+    accesos: any[]
   ) {
     localStorage.setItem("id", id);
     localStorage.setItem("token", token);
@@ -168,14 +174,16 @@ export class UsuariosService {
           confirmButtonText: "Cool"
         });
       })
-      .catch(err =>{{
-        Swal.fire({
-          title: err.message,
-          text: err.ext_permitidas,
-          icon: "error",
-          confirmButtonText: "Cool"
-        })
-      }}
+      .catch(err => {
+        {
+          Swal.fire({
+            title: err.message,
+            text: err.ext_permitidas,
+            icon: "error",
+            confirmButtonText: "Cool"
+          })
+        }
+      }
       );
   }
 
@@ -188,13 +196,17 @@ export class UsuariosService {
       }),
       catchError(err => {
 
-        Swal.fire({
-          title: "Error!",
-          text: err.error.message,
-          icon: "error",
-          confirmButtonText: "Cool"
-        })
-        return Observable.throw(err)
+        if(err.status == 0){
+          this.logout()
+        }else{
+          console.log(err)
+         return  Swal.fire({
+            title: "No puedes acceder!",
+            text: err.error.message,
+            icon: "error",
+            confirmButtonText: "Cool"
+          });
+        }
       })
 
     );
@@ -214,13 +226,17 @@ export class UsuariosService {
       }),
       catchError(err => {
 
-        Swal.fire({
-          title: "Error!",
-          text: err.error.message,
-          icon: "error",
-          confirmButtonText: "Cool"
-        })
-        return Observable.throw(err)
+        if(err.status == 0){
+          this.logout()
+        }else{
+          console.log(err)
+         return  Swal.fire({
+            title: "No puedes acceder!",
+            text: err.error.message,
+            icon: "error",
+            confirmButtonText: "Cool"
+          });
+        }
       })
     );
   }
@@ -233,13 +249,17 @@ export class UsuariosService {
         map((data: any) => data.message),
         catchError(err => {
 
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
@@ -252,13 +272,17 @@ export class UsuariosService {
         map((data: any) => data),
         catchError(err => {
 
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
@@ -271,16 +295,21 @@ export class UsuariosService {
         map((data: any) => data),
         catchError(err => {
 
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+            return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
+
 
   actualizarEmail(usuario: UsuarioModel) {
     let url = `${URL_SERVICES}/auth/user/email/${this.user._id}`;
@@ -290,13 +319,17 @@ export class UsuariosService {
         map((data: any) => data),
         catchError(err => {
 
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
@@ -309,26 +342,30 @@ export class UsuariosService {
         map((data: any) => data.message),
         catchError(err => {
 
-          let email = err.error.message.message
-
-          email = email.substring(email.lastIndexOf(':') + 1, email.length)
-
-          Swal.fire({
-            title: "Error!",
-            text: email,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+            let email = err.error.message.message
+  
+            email = email.substring(email.lastIndexOf(':') + 1, email.length)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: email,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
 
 
-  enviarEmailReset(email:string) {
+  enviarEmailReset(email: string) {
     let url = `${URL_SERVICES}/aula/password/email`;
     return this._http
-      .post(url, {email}, { headers: this.cargarHeaders() })
+      .post(url, { email }, { headers: this.cargarHeaders() })
       .pipe(
         map((data: any) => {
           this.codigo = data.codigo
@@ -336,15 +373,18 @@ export class UsuariosService {
         }),
         catchError(err => {
 
-          console.log(err);
 
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
@@ -353,8 +393,8 @@ export class UsuariosService {
     let url = `${URL_SERVICES}/aula/password/email`;
 
     let body = {
-      codigoIngresado:code,
-      codigoOriginal :this.codigo
+      codigoIngresado: code,
+      codigoOriginal: this.codigo
     }
 
     return this._http
@@ -363,21 +403,23 @@ export class UsuariosService {
         map((data: any) => data),
         catchError(err => {
 
-          console.log(err);
-
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }
 
 
-  changePass(user:UsuarioModel) {
+  changePass(user: UsuarioModel) {
     let url = `${URL_SERVICES}/aula/password/reset`;
     return this._http
       .put(url, user, { headers: this.cargarHeaders() })
@@ -385,14 +427,17 @@ export class UsuariosService {
         map((data: any) => data),
         catchError(err => {
 
-          console.log(err);
-          Swal.fire({
-            title: "Error!",
-            text: err.error.message,
-            icon: "error",
-            confirmButtonText: "Cool"
-          })
-          return Observable.throw(err)
+          if(err.status == 0){
+            this.logout()
+          }else{
+            console.log(err)
+           return  Swal.fire({
+              title: "No puedes acceder!",
+              text: err.error.message,
+              icon: "error",
+              confirmButtonText: "Cool"
+            });
+          }
         })
       );
   }

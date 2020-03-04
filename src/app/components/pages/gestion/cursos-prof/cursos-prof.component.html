@@ -2,12 +2,26 @@
     <app-breadcrumbs></app-breadcrumbs>
     <app-loading *ngIf="loading"></app-loading>
 
+    <section class="search">
+        <div class="container-caja">
+          <i class="fas fa-search icon"></i>
+          <input
+            #input
+            type="text"
+            class="caja"
+            (keyup)="buscarCurso(input.value)"
+            placeholder="Buscar Cursos"
+          />
+        </div>
+      </section>
+  
+
 
     <!-- seccion para los cursos  -->
 
     <div class="container-user">
 
-        <div class="registrarCurso registro card">
+        <div class="registro-cur card">
             <p class="title">Registrar nuevo Curso</p>
             <form #form="ngForm" class="formulario" (ngSubmit)="crearCurso(form)">
                 <div class="container-formulario">
@@ -53,8 +67,8 @@
                         <div class="regestro">
                             <!-- <i class="fas fa-plus-circle icon iconadd" (click)="addCurso()"></i> -->
                         </div>
-                        <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesde(-4)"></i>
-                        <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesde(4)"></i>
+                        <i class="fas fa-chevron-circle-left icon icon-pag" (click)="cambiardesde(-7)"></i>
+                        <i class="fas fa-chevron-circle-right icon icon-pag" (click)="cambiardesde(7)"></i>
                     </div>
                 </div>
 
@@ -63,7 +77,7 @@
                 </div>
 
 
-                <div style="overflow-x: auto;" *ngIf="totalCursos">
+                <div style="overflow-x: auto;" class="scrolltable" *ngIf="totalCursos">
                     <table class="table">
                         <thead>
                             <tr>
@@ -91,6 +105,7 @@
                                 <td style="text-align: center;">
                                     <i class="fas fa-pen icon icon-edit" (click)="modal('curso',curso)">
                                     </i>
+                                    <i class="fas fas fa-magic icon icon-desc" (click)="objetivosredirect(curso)"></i>
                                     <i class="fas fa-trash icon icon-delete" (click)="eliminarCurso(curso)"></i>
                                 </td>
                             </tr>
@@ -101,208 +116,6 @@
         </section>
 
     </div>
-
-    <!-- seccion para los objetivos  -->
-    <div class="container-modulox">
-        <div class="container-user ">
-    
-            <div class="registraModulo registro card">
-                <p class="title">Registrar un nuevo Objetivo</p>
-                <form #formObj="ngForm" class="formulario" (ngSubmit)="registrarObj(formObj)">
-                    <div class="container-formulario">
-                        <div class="input">
-                            <label for="">Titulo</label>
-                            <div class="container-caja">
-                                <i class="fab fa-codepen icon icon-title"></i>
-                                <input type="text" class="caja" name="nombre" placeholder="Nombre del Objetivo"
-                                    autocomplete="off" ngModel required />
-                            </div>
-                        </div>
-    
-                        <div class="input input-select">
-                            <mat-form-field>
-                                <mat-label>Selecciona un curso</mat-label>
-                                <mat-select [(value)]="selectedCursoObjReg">
-                                    <mat-option [value]="curso._id" *ngFor="let curso of cursos"> {{curso.nombre}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-    
-                    <button type="submit" mat-raised-button class="btn-submit">
-                        Registrar Objetivo
-                    </button>
-                </form>
-            </div>
-    
-            <section class="container-modulo card animated fadeIn">
-                <div>
-                    <div class="opciones-demo">
-                        <p class="registrados">
-                            Objetivos ( <span>{{ totalObjetivos }}</span> )
-                        </p>
-                        <div class="paginacion">
-                            <div class="regestro">
-                                <div class="input selectedModulo">
-                                    <mat-form-field>
-                                        <mat-label>Curso</mat-label>
-                                        <mat-select [(value)]="selectedCursoObj">
-    
-                                            <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos" (click)="listarObjetivos()">
-                                                {{curso.nombre}}
-                                            </mat-option>
-    
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="noencontrado" *ngIf="totalObjetivos <= 0">
-                        no se encontraron objetivos para el curso seleccionado
-                    </div>
-    
-    
-                    <div style="overflow-x: auto;" *ngIf="totalObjetivos > 0">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="animated fadeIn">
-                                <tr *ngFor="let objetivo of objetivos">
-    
-                                   
-                                    <td class="nombre-td">
-                                        <div class="containercaja">
-                                            <input type="text" class="caja" [value]="objetivo.nombre" name="nombre" [(ngModel)]="objetivo.nombre ">
-                                        </div>
-                                    </td>
-
-                                    <td>{{ objetivo.fecha | date }}</td>
-    
-                                    <td style="text-align: center;">
-                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarObj(objetivo)">
-                                        </i>
-                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarObj(objetivo)"></i>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-    
-        </div>
-    </div>
-
-    <!-- seccion para los requisitos  -->
-
-    <div class="container-modulox">
-        <div class="container-user ">
-    
-            <div class="registraModulo registro card">
-                <p class="title">Registrar un nuevo requerimento</p>
-                <form #formReq="ngForm" class="formulario" (ngSubmit)="registrarReq(formReq)">
-                    <div class="container-formulario">
-                        <div class="input">
-                            <label for="">Titulo</label>
-                            <div class="container-caja">
-                                <i class="fab fa-codepen icon icon-title"></i>
-                                <input type="text" class="caja" name="nombre" placeholder="Nombre del requerimento"
-                                    autocomplete="off" ngModel required />
-                            </div>
-                        </div>
-    
-                        <div class="input input-select">
-                            <mat-form-field>
-                                <mat-label>Selecciona un curso</mat-label>
-                                <mat-select [(value)]="selectedCursoReqReg">
-                                    <mat-option [value]="curso._id" *ngFor="let curso of cursos"> {{curso.nombre}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-    
-                    <button type="submit" mat-raised-button class="btn-submit">
-                        Registrar requerimento
-                    </button>
-                </form>
-            </div>
-    
-            <section class="container-modulo card animated fadeIn">
-                <div>
-                    <div class="opciones-demo">
-                        <p class="registrados">
-                            Requerimentos ( <span>{{ totalRequisitos }}</span> )
-                        </p>
-                        <div class="paginacion">
-                            <div class="regestro">
-                                <div class="input selectedModulo">
-                                    <mat-form-field>
-                                        <mat-label>Curso</mat-label>
-                                        <mat-select [(value)]="selectedCursoReq">
-    
-                                            <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos"
-                                                (click)="listarRequisitos()">
-                                                {{curso.nombre}}
-                                            </mat-option>
-    
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="noencontrado" *ngIf="totalRequisitos <= 0">
-                        no se encontraron requisitos para el curso seleccionado
-                    </div>
-    
-    
-                    <div style="overflow-x: auto;" *ngIf="totalRequisitos > 0">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="animated fadeIn">
-                                <tr *ngFor="let requerimeto of requisitos">
-    
-    
-                                    <td class="nombre-td">
-                                        <div class="containercaja">
-                                            <input type="text" class="caja" [value]="requerimeto.nombre" name="nombre"
-                                                [(ngModel)]="requerimeto.nombre ">
-                                        </div>
-                                    </td>
-    
-                                    <td>{{ requerimeto.fecha | date }}</td>
-    
-                                    <td style="text-align: center;">
-                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarReq(requerimeto)">
-                                        </i>
-                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarReq(requerimeto)"></i>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-    
-        </div>
-    </div>
-
    
 </div>
 

@@ -23,7 +23,7 @@ export class CursosComponent implements OnInit {
 
   cargarCursos() {
     this.loading = true
-    this._service.cargarCursos().subscribe((data: any) => {
+    this._service.listarTodoslosCursos().subscribe((data: any) => {
       this.cursos = data;
       this.loading = false;
     },(err) => this.loading = false);

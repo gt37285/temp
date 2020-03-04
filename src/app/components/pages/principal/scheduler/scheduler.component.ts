@@ -113,7 +113,6 @@ export class SchedulerComponent implements OnInit {
     this._service.cargarTareaPorUsuario(this._userService.user._id)
       .subscribe((data: any) => {
 
-        console.log(data)
 
         this.calendarEvents = data
 
@@ -155,7 +154,6 @@ export class SchedulerComponent implements OnInit {
 
     this.evento = event.event
 
-    console.log(this.evento)
     this.render.addClass(modal, "show-modal");
 
   }

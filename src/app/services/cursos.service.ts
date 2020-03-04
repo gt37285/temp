@@ -37,14 +37,51 @@ export class CursosService {
           return data.curso
         }),
         catchError(err => {
-          let mensaje = err.error.err.message
 
-          return Swal.fire({
-            title: "Advertencia!",
-            text: mensaje,
-            icon: "warning",
-            confirmButtonText: "Cool"
-          });
+          console.log(err);
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
+
+        })
+      );
+  }
+
+  listarTodoslosCursos(){
+    let url = `${URL_SERVICES}/aula/cursos/all`;
+
+    return this._http
+      .get(url, { headers: this._userService.cargarHeaders() })
+      .pipe(
+        map((data: any) => {
+          this.cursos = data.curso
+          this.guardarStorage(data.curso)
+          return data.curso
+        }),
+        catchError(err => {
+
+          console.log(err);
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
 
         })
       );
@@ -63,14 +100,21 @@ export class CursosService {
           return data.curso
         }),
         catchError(err => {
-          let mensaje = err.error.err.message
 
-          return Swal.fire({
-            title: "Advertencia!",
-            text: mensaje,
-            icon: "warning",
-            confirmButtonText: "Cool"
-          });
+          console.log(err);
+
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
 
         })
       );
@@ -84,12 +128,20 @@ export class CursosService {
         map((data: any) => data),
         catchError(err => {
 
-          return Swal.fire({
-            title: "Advertencia!",
-            text: err.error,
-            icon: "warning",
-            confirmButtonText: "Cool"
-          });
+          console.log(err);
+
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
 
         })
       );
@@ -103,12 +155,20 @@ export class CursosService {
         map((data: any) => data),
         catchError(err => {
 
-          return Swal.fire({
-            title: "Advertencia!",
-            text: err.error,
-            icon: "warning",
-            confirmButtonText: "Cool"
-          });
+          console.log(err);
+
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
 
         })
       );
@@ -136,12 +196,20 @@ export class CursosService {
         map((data: any) => data.data.cursos),
         catchError(err => {
 
-          return Swal.fire({
-            title: "Advertencia!",
-            text: err.error,
-            icon: "warning",
-            confirmButtonText: "Cool"
-          });
+          console.log(err);
+
+          if(err.status == 0){
+            this._userService.logout()
+          }else{
+            let mensaje = err.error.err.message
+    
+            return Swal.fire({
+              title: "Advertencia!",
+              text: mensaje,
+              icon: "warning",
+              confirmButtonText: "Cool"
+            })
+          }
 
         })
       );
@@ -155,14 +223,21 @@ export class CursosService {
       map(data => data),
       catchError(err => {
 
-        let mensaje = err.error.err.message
+        console.log(err);
 
-        return Swal.fire({
-          title: "Advertencia!",
-          text: mensaje,
-          icon: "warning",
-          confirmButtonText: "Cool"
-        });
+        if(err.status == 0){
+          this._userService.logout()
+        }else{
+          let mensaje = err.error.err.message
+  
+          return Swal.fire({
+            title: "Advertencia!",
+            text: mensaje,
+            icon: "warning",
+            confirmButtonText: "Cool"
+          })
+        }
+
 
       })
     )
@@ -176,14 +251,20 @@ export class CursosService {
       map(data => data),
       catchError(err => {
 
-        let mensaje = err.error.err.message
+        console.log(err);
 
-        return Swal.fire({
-          title: "Advertencia!",
-          text: mensaje,
-          icon: "warning",
-          confirmButtonText: "Cool"
-        });
+        if(err.status == 0){
+          this._userService.logout()
+        }else{
+          let mensaje = err.error.err.message
+  
+          return Swal.fire({
+            title: "Advertencia!",
+            text: mensaje,
+            icon: "warning",
+            confirmButtonText: "Cool"
+          })
+        }
 
       })
     )
@@ -197,14 +278,20 @@ export class CursosService {
       map(data => data),
       catchError(err => {
 
-        let mensaje = err.error.err.message
 
-        return Swal.fire({
-          title: "Advertencia!",
-          text: mensaje,
-          icon: "warning",
-          confirmButtonText: "Cool"
-        });
+        console.log(err);
+        if(err.status == 0){
+          this._userService.logout()
+        }else{
+          let mensaje = err.error.err.message
+  
+          return Swal.fire({
+            title: "Advertencia!",
+            text: mensaje,
+            icon: "warning",
+            confirmButtonText: "Cool"
+          })
+        }
 
       })
     )

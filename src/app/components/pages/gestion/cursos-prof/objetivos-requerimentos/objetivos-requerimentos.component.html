@@ -1,0 +1,164 @@
+
+<div class="container">
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <!-- seccion para los objetivos  -->
+    <div class="container-modulox">
+        <div class="container-user ">
+    
+            <div class="registro-obj card">
+                <p class="title">Registrar un nuevo Objetivo</p>
+                <form #formObj="ngForm" class="formulario" (ngSubmit)="registrarObj(formObj)">
+                    <div class="container-formulario">
+                        <div class="input">
+                            <label for="">Titulo</label>
+                            <div class="container-caja">
+                                <i class="fab fa-codepen icon icon-title"></i>
+                                <input type="text" class="caja" name="nombre" placeholder="Nombre del Objetivo"
+                                    autocomplete="off" ngModel required />
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <button type="submit" mat-raised-button class="btn-submit">
+                        Registrar Objetivo
+                    </button>
+                </form>
+            </div>
+    
+            <section class="container-modulo container-modulocc card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Objetivos ( <span>{{ totalObjetivos }}</span> )
+                        </p>
+                        <div class="paginacion">
+                            <div class="regestro">
+                                <div class="input selectedModulo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="noencontrado" *ngIf="totalObjetivos <= 0">
+                        no se encontraron objetivos para el curso seleccionado
+                    </div>
+    
+    
+                    <div style="overflow-x: auto;" class="scrolltable"  *ngIf="totalObjetivos > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="animated fadeIn">
+                                <tr *ngFor="let objetivo of objetivos">
+    
+                                   
+                                    <td class="nombre-td">
+                                        <div class="containercaja">
+                                            <input type="text" class="caja" [value]="objetivo.nombre" name="nombre" [(ngModel)]="objetivo.nombre ">
+                                        </div>
+                                    </td>
+    
+                                    <td>{{ objetivo.fecha | date }}</td>
+    
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarObj(objetivo)">
+                                        </i>
+                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarObj(objetivo)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+        </div>
+    </div>
+    
+    <!-- seccion para los requisitos  -->
+    
+    <div class="container-modulox">
+        <div class="container-user ">
+    
+            <div class="registro-obj registro card">
+                <p class="title">Registrar un nuevo requerimento</p>
+                <form #formReq="ngForm" class="formulario" (ngSubmit)="registrarReq(formReq)">
+                    <div class="container-formulario">
+                        <div class="input">
+                            <label for="">Titulo</label>
+                            <div class="container-caja">
+                                <i class="fab fa-codepen icon icon-title"></i>
+                                <input type="text" class="caja" name="nombre" placeholder="Nombre del requerimento"
+                                    autocomplete="off" ngModel required />
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <button type="submit" mat-raised-button class="btn-submit">
+                        Registrar requerimento
+                    </button>
+                </form>
+            </div>
+    
+            <section class="container-modulo container-modulocc card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Requerimentos ( <span>{{ totalRequisitos }}</span> )
+                        </p>
+                    </div>
+    
+                    <div class="noencontrado" *ngIf="totalRequisitos <= 0">
+                        no se encontraron requisitos para el curso seleccionado
+                    </div>
+    
+    
+                    <div style="overflow-x: auto;" class="scrolltable"  *ngIf="totalRequisitos > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="animated fadeIn">
+                                <tr *ngFor="let requerimeto of requisitos">
+    
+    
+                                    <td class="nombre-td">
+                                        <div class="containercaja">
+                                            <input type="text" class="caja" [value]="requerimeto.nombre" name="nombre"
+                                                [(ngModel)]="requerimeto.nombre ">
+                                        </div>
+                                    </td>
+    
+                                    <td>{{ requerimeto.fecha | date }}</td>
+    
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-pen icon icon-edit" (click)="actualizarReq(requerimeto)">
+                                        </i>
+                                        <i class="fas fa-trash icon icon-delete" (click)="eliminarReq(requerimeto)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+        </div>
+    </div>
+
+
+</div>
+

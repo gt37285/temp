@@ -15,6 +15,7 @@ import { ObjetivoModel } from '../../../../models/cursos/objetivos.model';
 import { ObjetivosService } from '../../../../services/objetivos.service';
 import { requerimentosService } from '../../../../services/requerimentos.service';
 import { requerimentoModel } from '../../../../models/cursos/requerimentos.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cursos-prof',
@@ -41,6 +42,7 @@ export class CursosProfComponent implements OnInit {
   public totalObjetivos: number = 0
   public selectedCursoObj: string = ''
   public selectedCursoObjReg: string = ''
+  public cursosAux:cursoModel[] = []
   
 
   /**definiciones para los requerimentos */
@@ -56,7 +58,8 @@ export class CursosProfComponent implements OnInit {
     public _serviceModal: ModalService,
     private _userService: UsuariosService,
     private _objetivoService: ObjetivosService,
-    private _requisitoService: requerimentosService
+    private _requisitoService: requerimentosService,
+    private router:Router
   ) { 
 
     this.dificultad = ['bajo','medio','alto']
@@ -511,6 +514,10 @@ export class CursosProfComponent implements OnInit {
       },
         (err) => this.loading = false
       )
+  }
+
+  objetivosredirect(curso:cursoModel){
+    this.router.navigate(['/aula/prof/cursos/objetivosRequisitos/',curso._id])
   }
 
 }

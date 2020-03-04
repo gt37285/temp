@@ -20,6 +20,25 @@ $primario: #456c9e;
   transition: transform 0.1s ease-in;
   overflow: auto;
   z-index: 10;
+
+  &::-webkit-scrollbar {
+      width: 5px;     /* Tamaño del scroll en vertical */
+      height: 8px;    /* Tamaño del scroll en horizontal */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #a7a7a7;
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #b3b3b3;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+        background-color: #999999;
+    }
 }
 
 .show-sidebar {

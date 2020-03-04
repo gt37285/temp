@@ -15,9 +15,10 @@ registerLocaleData(español);
 /**angular material */
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { InstitucionComponent } from './instituciones/institucion.component';
+import { PasswordComponent } from './password/password.component';
 
 @NgModule({
-  declarations: [UsuariosComponent, InstitucionComponent],
+  declarations: [UsuariosComponent, InstitucionComponent, PasswordComponent],
   imports: [
     SharedModule,
     ErrorsModule,
