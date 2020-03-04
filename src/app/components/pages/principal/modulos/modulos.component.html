@@ -82,42 +82,42 @@
         <!-- seccion para los recursos   -->
 
 
-        <div class="temario recursos" *ngIf="true">
-
             <div *ngFor="let item of curso.modulos">
-                <p class="title" *ngIf="item.recursos.length > 0">Recursos</p>
-    
-                <div *ngIf="item.recursos.length > 0">
-    
-                    <!-- <mat-expansion-panel class="acordeon" >
-                        <mat-expansion-panel-header>
-                            <mat-panel-title class="tema">{{item.nombre}}</mat-panel-title>
-                        </mat-expansion-panel-header>
-     -->
-                        <div class="contenido" *ngFor="let recurso of item.recursos">
-                            <div class="contenido">
-                                <div class="clase">
-                                    <i class="far fa-file icon"></i>
-                                    <a [href]="recurso.nombre | descarga:'recursos'" class="videos"
-                                        download="{{recurso.tema}}">{{recurso.tema | capitalizar}}</a>
+                <div *ngIf="item.recursos.length > 0"  class="temario recursos">
+                    <p class="title" *ngIf="item.recursos.length > 0">Recursos</p>
+        
+                    <div *ngIf="item.recursos.length > 0">
+        
+                        <!-- <mat-expansion-panel class="acordeon" >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class="tema">{{item.nombre}}</mat-panel-title>
+                            </mat-expansion-panel-header>
+         -->
+                            <div class="contenido" *ngFor="let recurso of item.recursos">
+                                <div class="contenido">
+                                    <div class="clase">
+                                        <i class="far fa-file icon"></i>
+                                        <a [href]="recurso.nombre | descarga:'recursos'" class="videos"
+                                            download="{{recurso.tema}}">{{recurso.tema | capitalizar}}</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-    
-                    <!-- </mat-expansion-panel> -->
+        
+                        <!-- </mat-expansion-panel> -->
+                    </div>
+
                 </div>
             </div>
-
-        </div>
 
 
         <!-- seccion para las tareas   -->
         
         
-        <div class="temario recursos" *ngIf="true">
-        
+        <div class="temario recursos" *ngIf="tareas.length > 0">
+            
+            <p class="title" *ngIf="tareas.length > 0">Actividades</p>
+
             <div *ngFor="let tarea of tareas">
-                <p class="title" *ngIf="tareas?.length > 0">Actividades</p>
 
                     <div class="contenido" >
                         <div class="contenido">
@@ -137,10 +137,10 @@
         <!-- seccion para las evaluaciones   -->
         
         
-        <div class="temario recursos" *ngIf="true">
+        <div class="temario recursos" *ngIf="evaluaciones.length > 0">
+            <p class="title" *ngIf="evaluaciones.length > 0">Evaluaciones</p>
         
             <div *ngFor="let evaluacion of evaluaciones">
-                <p class="title" *ngIf="evaluacion?.length > 0">Evaluaciones</p>
 
                     <div class="contenido" >
                         <div class="contenido">

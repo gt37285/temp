@@ -1,5 +1,7 @@
+
 <div class="container fadeIn">
   <!-- header -->
+  <app-loading *ngIf="loading"></app-loading>
 
   <div class="card">
     <img [src]="curso?.img | imagen: 'cursos'" class="img-curso img" alt="" />

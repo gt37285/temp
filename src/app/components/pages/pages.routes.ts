@@ -33,6 +33,8 @@ import { FormularioComponent } from './gestion/evaluaciones/formulario/formulari
 import { TestComponent } from './principal/test/test.component';
 import { ResultadoComponent } from './principal/test/resultado/resultado.component';
 import { EvaluacionesGuard } from 'src/app/guards/evaluaciones.guard';
+import { ReportesComponent } from './gestion/evaluaciones/reportes/reportes.component';
+import { PreguntasGuard } from 'src/app/guards/preguntas.guard';
 
 const routes: Routes = [
 
@@ -148,9 +150,15 @@ const routes: Routes = [
     data: { titulo: "Evaluaciones", father: "Gestion" }
   },
   {
+    path: "prof/evaluaciones/reportes/:id",
+    component: ReportesComponent,
+    canActivate: [ProfGuard],
+    data: { titulo: "Reporte de Estudiantes", father: "Evaluaciones" }
+  },
+  {
     path: "prof/evaluaciones/formulario/:id",
     component: FormularioComponent,
-    canActivate: [ProfGuard],
+    canActivate: [ProfGuard,PreguntasGuard],
     data: { titulo: "Evaluaciones", father: "Gestion" }
   },
   {
@@ -171,6 +179,7 @@ const routes: Routes = [
     canActivate: [ProfGuard],
     data: { titulo: "Listado de Estudiantes", father: "Matriculas" }
   }
+  
   
 ];
 

@@ -60,7 +60,9 @@
                                     <td>{{evaluacion.fecha_f | date:'dd MMM. yyyy HH:mm'}}</td>
                                     
                                     <td style="text-align: center;">
-                                        <i class="fas fa-chart-pie icon icon-desc" (click)="estadistica(evaluacion)"></i>
+                                        <i class="fas fa-book-open icon icon-edit" (click)="reportes(evaluacion)"></i>
+                                        <i class="fas fa-question icon icon-delete" (click)="crearPreguntasEvaluacion(evaluacion)"></i>
+                                        <i class="fas fa-edit icon icon-delete" (click)="actualizar(evaluacion,modalact)"></i>
                                         <i class="fas fa-trash icon icon-trash" (click)="eliminar(evaluacion)"></i>
                                     </td>
                                 </tr>
@@ -163,12 +165,112 @@
 
             <label for="desc" class="textlab">
                 <p>Descripcion</p>
-                <textarea name="desc" name="desc" class="textarea" id="desc" cols="50" rows="5" ngModel>...</textarea>
+                <textarea name="desc" name="desc" class="textarea" id="desc" cols="50" rows="5" [(ngModel)]="descText">...</textarea>
             </label>
 
             <div class="botones-container">
                 <button type="submit" mat-raised-button class="submit">Registrar</button>
                 <button type="button" mat-raised-button class="btn-cancelar" (click)="hiddenModal(modal,form)">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- modal de actualización  -->
+
+<div class="container-modalx" #modalact>
+    <div class="modal">
+        <section class="container-title">
+            <p class="title"> Actualizar evaluación </p>
+            <p class="subtitle">Ser bachiller</p> 
+        </section>
+
+        <hr>
+
+        <form #formact="ngForm" class="forminput" (ngSubmit)="actualizarEvaluacion(formact,modalact,evaluacionact)">
+
+            <div class="input">
+                <label for="nombreinputact">
+                    <span>Nombre</span>
+                    <input type="text" class="caja" name="nombre" autocomplete="off" 
+                        placeholder="Evaluacion x..." id="nombreinputact" [ngModel]="evaluacionact?.nombre" required
+                    >
+                </label>
+            </div>
+
+            <div class="selectcurso">
+                <mat-form-field>
+                    <mat-label>Curso</mat-label>
+                    <mat-select [(value)]="selectedCursoReg">
+        
+                        <mat-option selected="true" [value]="curso._id" *ngFor="let curso of cursos" required>
+                            {{curso.nombre}}
+                        </mat-option>
+        
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="input">
+                <label for="fecha_iact">
+                    <span>Fecha Inicio</span>
+                    <input type="datetime-local" class="caja" name="fecha_i" [min]="minDate" autocomplete="off" [value]="evaluacionact?.fecha_i | fechadatetime"  id="fecha_iact"  required>
+                </label>
+            </div>
+
+            <div class="input">
+                <label for="fecha_fact">
+                    <span>Fecha Caducidad</span>
+                    <input type="datetime-local" class="caja" name="fecha_f" [min]="minDate" autocomplete="off"  id="fecha_fact" [value]="evaluacionact?.fecha_f | fechadatetime"  required>
+                </label>
+            </div>
+
+
+
+            <label for="" class="labelTiempo"><span>Tiempo</span> </label>
+            <div class="containerTiempo">
+
+
+                <div class="selectcurso">
+                    <mat-form-field>
+                        <mat-label>Horas</mat-label>
+                        <mat-select [(value)]="selectHoras">
+            
+                            <mat-option selected="true" [value]="hora" *ngFor="let hora of horas" required>
+                                {{hora}}
+                            </mat-option>
+            
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                <div class="selectcurso">
+                    <mat-form-field>
+                        <mat-label>Minutos</mat-label>
+                        <mat-select [(value)]="selectMinutos">
+            
+                            <mat-option selected="true" [value]="minuto" *ngFor="let minuto of minutos" required>
+                                {{minuto}}
+                            </mat-option>
+            
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>    
+            
+
+            <label for="descact" class="textlab">
+                <p>Descripcion</p>
+                <textarea name="desc" name="descripcion" class="textarea" id="descact" cols="50" rows="5" [value]="evaluacionact?.descripcion" [(ngModel)]="descText">...</textarea>
+            </label>
+
+            <div class="botones-container">
+                <button type="submit" mat-raised-button class="submit">Registrar</button>
+                <button type="button" mat-raised-button class="btn-cancelar" (click)="hiddenModal(modalact,formact)">Cancelar</button>
             </div>
 
         </form>

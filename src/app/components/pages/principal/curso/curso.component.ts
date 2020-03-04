@@ -17,7 +17,7 @@ import { requerimentoModel } from 'src/app/models/cursos/requerimentos.model';
 })
 export class CursodComponent implements OnInit {
   public curso: cursoModel;
-  public loading: boolean;
+  public loading: boolean = false;
   public objetivos: ObjetivoModel[] = [];
   public requerimentos: requerimentoModel[] = []
   public matriculado:boolean = false
@@ -36,30 +36,29 @@ export class CursodComponent implements OnInit {
 
   cargarCurso() {
     this.loading = true
-    this._routerLink.params.subscribe(async url => {
+    this._routerLink.params.subscribe( url => {
 
       this._service.id_curso = url.id
-      await this.verificarMatricula()
-      this.loading = true
-      await this._service.cargarCurso(url.id).subscribe(data => {
+      this.verificarMatricula()
+
+      this._service.cargarCurso(url.id).subscribe(data => {
         this.curso = data;
         this.loading = false;
       });
-      await this.listarObjetivos(url.id)
-      await this.listarRequerimentos(url.id)
+      this.listarObjetivos(url.id)
+      this.listarRequerimentos(url.id)
+
+      
     });
   }
 
   verificarMatricula() {
-    this.loading = true,
       this._service.verificarMatricula()
       .subscribe(
         (data => {
           this._service.matricula = data.estado
           this.matriculado = data.estado
-          this.loading = false
-        }),
-        (err => this.loading = false)
+        })
       )
   }
 

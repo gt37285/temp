@@ -9,10 +9,11 @@ import { DomSeguroPipe } from './dom-seguro.pipe';
 import { ArchivosPipe } from './archivos.pipe';
 import { DescargaPipe } from './descarga.pipe';
 import { TelefonoPipe } from './telefono.pipe';
+import { FechadatetimePipe } from './fechadatetime.pipe';
 
 @NgModule({
-  declarations: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe],
+  declarations: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe, FechadatetimePipe],
   imports: [],
-  exports: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe]
+  exports: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe,FechadatetimePipe]
 })
 export class PipesModule { }

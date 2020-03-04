@@ -20,6 +20,7 @@ export class EvaluacionesGuard implements CanActivate {
     let estado = sessionStorage.getItem('izx')
     let evaluacion = sessionStorage.getItem('evd')
 
+
     if(estado == "0"){
       permiso = true
     }else{

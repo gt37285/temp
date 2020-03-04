@@ -1,0 +1,64 @@
+<div class="container">
+
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <div class="container-recur">
+
+        <!-- seccion para los recursos  -->
+        
+        <div class="container-user">
+        
+            <section class="container-recurso card animated fadeIn">
+                <div>
+                    <div class="opciones-demo">
+                        <p class="registrados">
+                            Reportes ( <span>{{ total }}</span> )
+                        </p>
+                    </div>
+        
+                    <div class="noencontrado" *ngIf="total <= 0">
+                        no se encontraron reportes
+                    </div>
+        
+                    <div style="overflow-x: auto;" *ngIf="total > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Img Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>puntaje</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="animated fadeIn">
+
+                                
+                                <tr *ngFor="let evaluacion of evaluaciones">
+
+                                    <td style="text-align: center;">
+                                        <img
+                                          class="img"
+                                          [src]="evaluacion.usuario.img | imagen"
+                                          alt="imagen_usuario"
+                                        />
+                                    </td>
+
+                                    <td>{{evaluacion.usuario.nombre | capitalizar}}</td>
+                                    <td>{{evaluacion.usuario.apellido | capitalizar}}</td>
+                                    <td>{{evaluacion.usuario.email}}</td>
+                                    <td>{{evaluacion.puntaje}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        
+        
+        </div>
+
+    </div>
+</div>

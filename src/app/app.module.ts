@@ -19,7 +19,6 @@ import { PagesComponent } from './components/pages/pages.component';
 import { ModalUploadComponent } from './components/pages/modal-upload/modal-upload.component';
 import { SharedModule } from './components/shared/shared.module';
 import { AuthInterceptor } from './services/auth.interceptor';
-
 @NgModule({
   declarations: [AppComponent, PagesComponent],
   imports: [

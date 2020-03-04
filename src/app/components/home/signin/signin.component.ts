@@ -71,7 +71,10 @@ export class SigninComponent implements OnInit {
     this._service
       .Signin(usuario)
       .subscribe(data => {
-        this.loading = false
+        
+        if(data){
+          this.loading = false
+        }
         switch (data) {
           case 'ADMIN_ROLE':
             this._router.navigate(["aula/usuarios"])

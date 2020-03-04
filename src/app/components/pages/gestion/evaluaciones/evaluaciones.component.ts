@@ -21,11 +21,14 @@ export class EvaluacionesComponent implements OnInit {
   public total:Number = 0
   public minDate: any = `${new Date().getFullYear()}-0${new Date().getMonth()+1}-${new Date().getDate()}T16:00:00`
   public selectedCursoReg:String = ""
+  public evaluacionact:evaluacionModel
 
   public minutos:String[] = []
   public horas:String[] = []
   public selectMinutos:String = ''
   public selectHoras:String = ''
+  public descText:String = ''
+
 
 
   constructor(
@@ -160,6 +163,7 @@ export class EvaluacionesComponent implements OnInit {
     let evaluacion:evaluacionModel = form.value
     evaluacion.tiempo = tiempo
     evaluacion.curso = this.selectedCursoReg
+    evaluacion.descripcion = this.descText
 
     if(form.value.fecha_f <= form.value.fecha_i){
       return Swal.fire({
@@ -186,6 +190,10 @@ export class EvaluacionesComponent implements OnInit {
           this.loading = false
           form.reset()
           this.render.removeClass(modal,'show-modal')
+          this.selectedCursoReg = ''
+          this.descText = ''
+          this.selectMinutos=''
+          this.selectHoras=''
           this.service.agregarPregunta(pregunta,data.id)
             .subscribe((data => data))
         }),
@@ -193,8 +201,14 @@ export class EvaluacionesComponent implements OnInit {
       )
   }
 
-  estadistica(evaluacion:evaluacionModel){
+  crearPreguntasEvaluacion(evaluacion:evaluacionModel){
+
+    if(evaluacion.fecha_f.toString() <= new Date().toISOString()){
+      sessionStorage.setItem("izv","0")
+    }
+
     this.router.navigate(['/aula/prof/evaluaciones/formulario/',evaluacion._id])
+
   }
 
   showModal(modal:any){
@@ -204,6 +218,90 @@ export class EvaluacionesComponent implements OnInit {
   hiddenModal(modal:any,form:NgForm){
     this.render.removeClass(modal,'show-modal')
     form.reset()
+  }
+
+  reportes(evaluacion:evaluacionModel){
+    this.router.navigate(['/aula/prof/evaluaciones/reportes/',evaluacion._id])
+  }
+
+  actualizar(evaluacion:evaluacionModel,modal:any){
+    this.descText = evaluacion.descripcion
+    this.render.addClass(modal,'show-modal')
+    this.evaluacionact = evaluacion
+  }
+
+
+  actualizarEvaluacion(form:NgForm,modal:any,evaluacionact:evaluacionModel){
+    if(form.invalid){
+      return Swal.fire({
+        title: 'Formulario invalido',
+        text: 'completa todos los campos. La descripcion es opcional',
+        icon: 'warning'
+      })
+    }
+
+    if(!this.selectedCursoReg){
+      return Swal.fire({
+        title: 'Formulario invalido',
+        text: 'No se ha seleccionado el curso',
+        icon: 'warning'
+      })
+    }
+
+    if(!this.selectMinutos){
+      return Swal.fire({
+        title: 'Formulario invalido',
+        text: 'Selecciona los minutos',
+        icon: 'warning'
+      })
+    }
+
+    if(!this.selectHoras){
+      return Swal.fire({
+        title: 'Formulario invalido',
+        text: 'Selecciona una hora',
+        icon: 'warning'
+      })
+    }
+
+
+    let tiempo = `${this.selectHoras}:${this.selectMinutos}:01`
+    let evaluacion:evaluacionModel = form.value
+    evaluacion._id = evaluacionact._id
+    evaluacion.tiempo = tiempo
+    evaluacion.curso = this.selectedCursoReg
+    evaluacion.descripcion = this.descText
+
+    if(form.value.fecha_f <= form.value.fecha_i){
+      return Swal.fire({
+        title: 'Formulario invalido',
+        text: 'la fecha de caducidad no puede ser inferior o igual a la fecha de inicio',
+        icon: 'warning'
+      })
+    }
+
+
+    this.loading = true
+    this.service.actualizar(evaluacion)
+      .subscribe(
+        ((data:any) => {
+          Swal.fire({
+            title: 'Proceso completado',
+            text: 'la evaluacion ha sido registrada',
+            icon: 'success'
+          })
+          this.loading = false
+          form.reset()
+          this.render.removeClass(modal,'show-modal')
+          this.selectedCursoReg = ''
+          this.descText = ''
+          this.selectMinutos=''
+          this.selectHoras=''
+          this.selectedCurso = evaluacionact.curso
+          this.listarPorCurso()
+        }),
+        (err => this.loading = false)
+      )
   }
 
 }

@@ -1,6 +1,6 @@
 export class evaluacionModel{
     constructor(
-        public _id:String,
+        public _id:string,
         public nombre: String,
         public descripcion: String,
         public tiempo:String,

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { evaluacionModel } from '../models/cursos/evaluacion.model';
 import { preguntaModel } from '../models/cursos/pregunta.model';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class evaluacionesService {
 
     constructor( 
         private http:HttpClient,
-        private userService: UsuariosService
+        private userService: UsuariosService,
+        private router:Router
     ){}
 
 
@@ -45,6 +47,7 @@ export class evaluacionesService {
                 })
             )
     }
+
 
     actualizar(evaluacion:evaluacionModel){
         let url = `${URL_SERVICES}/aula/evaluacion/${evaluacion._id}`
@@ -386,6 +389,35 @@ export class evaluacionesService {
     }
 
 
+    listarReportes(id_evaluacion:String) {
 
+        let url = `${URL_SERVICES}/aula/evaluacion/resultados/${id_evaluacion}`
+
+        return this.http.get(url,{headers: this.userService.cargarHeaders()})
+            .pipe(
+                map((data:any) => data.estudiantes),
+                catchError((err:any) => {
+
+                    if(err.status == 501){
+                        this.router.navigate(['/aula/prof/evaluaciones'])
+                        return Swal.fire({
+                            title: 'Sin Reportes',
+                            text: err.error.message,
+                            icon: 'info'
+                        })
+                    }
+
+                    console.log(err);
+
+                    Swal.fire({
+                        title: 'Error',
+                        text: err.error.message,
+                        icon: 'error'
+                    })
+
+                    return Observable.throw(err)
+                })
+            ) 
+    }
 
 }
