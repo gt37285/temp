@@ -23,9 +23,10 @@ $fuente-nunito: "Nunito", sans-serif;
 }
 .marca::after {
   content: "VINCULACION UTN"; 
-  font-size: 15em;  
+  font-size: 5em;  
   color: rgba(52, 166, 214, 0.4);
-  z-index: 9999;
+  transform: rotate(35deg);
+  z-index: 100;
  
   display: flex;
   align-items: center;

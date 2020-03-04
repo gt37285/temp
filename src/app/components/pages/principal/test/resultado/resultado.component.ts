@@ -56,6 +56,7 @@ export class ResultadoComponent implements OnInit {
   }
 
   generarPDF() {
+    
     html2canvas(document.body).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
