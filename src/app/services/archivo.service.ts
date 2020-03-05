@@ -15,9 +15,10 @@ export class ArchivoService {
 
       /**se construye la url del backend */
 
-      let url = `${URL_SERVICES}/aula/archivo/${tipo}/${id}`;
+      let url = `${URL_SERVICES}/aula/archivo/${tipo}/${id}/${id_usuario}`;
 
       /**se construye el formulario que se va a enviar */
+
 
       let formData = new FormData();
       formData.append("archivo", archivo, archivo.name);
@@ -37,10 +38,6 @@ export class ArchivoService {
       });
 
       peticion.withCredentials = true
-
-      if (id_usuario) {
-        peticion.setRequestHeader('usuario', id_usuario)
-      }
 
       /**envias el formulario */
 

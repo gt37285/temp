@@ -11,7 +11,7 @@ export class DomSeguroPipe implements PipeTransform {
   ) { }
 
   transform(codigo: any, url: string): any {
-    return this._domSanitizer.bypassSecurityTrustResourceUrl(`${url}/${codigo}`);
+    return this._domSanitizer.bypassSecurityTrustResourceUrl(`${url}/${codigo}?autoplay=1`);
   }
 
 }
