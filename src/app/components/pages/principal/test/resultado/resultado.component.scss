@@ -3,6 +3,7 @@ $fuente-raleway: "Raleway", sans-serif;
 $fuente-nunito: "Nunito", sans-serif;
 
 
+
 .puntuacion{
     display: flex;
     align-items: center;
@@ -20,3 +21,31 @@ $fuente-nunito: "Nunito", sans-serif;
         margin-left: .3em;
     }
 }
+.marca::after {
+  content: "VINCULACION UTN"; 
+  font-size: 5em;  
+  color: rgba(52, 166, 214, 0.4);
+  transform: rotate(35deg);
+  z-index: 100;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+    
+  -webkit-pointer-events: none;
+  -moz-pointer-events: none;
+  -ms-pointer-events: none;
+  -o-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  }
