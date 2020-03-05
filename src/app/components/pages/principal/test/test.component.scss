@@ -52,7 +52,7 @@ $fuente-nunito: "Nunito", sans-serif;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    margin: 3em 0;
+    
 
     strong{
         font-family: $fuente-nunito;
@@ -62,7 +62,7 @@ $fuente-nunito: "Nunito", sans-serif;
     .bienvenida{
         font-family: $fuente-raleway;
         font-size: 17px;
-        margin-bottom: 5em;
+        margin: 5em 0 3em 0;
     }
 
     .pregunta{

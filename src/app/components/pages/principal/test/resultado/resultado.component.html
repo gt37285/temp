@@ -10,11 +10,14 @@
                 <p class="descripcion">{{evaluaciones?.descripcion}}</p>
             </div>
         </section>
-        <div class="marca" >
             <section class="body">
+                <div class="marca">
+                    <span >Vinculacion UTN</span>
+                </div>
                 <div class="bienvenida">
                     <p class="desc">Hola <strong>{{this.userService.user.nombre}}
                             {{this.userService.user.apellido}}</strong>, la evaluacion ha sido completada.</p>
+                    <p class="desc">Tu puntuacion</p>
                 </div>
 
                 <div class="puntuacion">
@@ -23,10 +26,9 @@
                     <span>/</span>
                     <span>10</span>
                 </div>
+
+                <button type="button" id="buttonform" mat-raised-button class="btn-submit"  (click)="generarPDF()">Descargar PDF</button>
+                
             </section>
-        </div>
     </div>
-</div>
-<div class="container">
-    <button type="submit" id="buttonform" (click)="generarPDF()" class="btn-submit">Descargar PDF</button>
 </div>
