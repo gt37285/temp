@@ -79,6 +79,7 @@ const routes: Routes = [
   {
     path: "curso/:id",
     component: CursodComponent,
+    canActivate: [EstGuard],
     data: { titulo: "Curso", father: "Principal" }
   },
   {

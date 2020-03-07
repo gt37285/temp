@@ -97,7 +97,6 @@ export class TestComponent implements OnInit {
 
           sessionStorage.removeItem('evd')
           sessionStorage.removeItem('tiempo')
-          sessionStorage.removeItem('bandera')
           sessionStorage.removeItem('izx')
 
           this.router.navigate(['/aula/evaluaciones/registro/resultados', this.id])
@@ -105,7 +104,6 @@ export class TestComponent implements OnInit {
         }),
         (err => this.loading = false)
       )
-
   }
 
 
@@ -168,7 +166,6 @@ export class TestComponent implements OnInit {
 
   calcularTiempo(tiempo: any) {
 
-
     let obj = new Observable(Observer => {
 
 
@@ -230,19 +227,11 @@ export class TestComponent implements OnInit {
 
     obj.subscribe(
       (cronometro => {
-        sessionStorage.setItem('bandera', '1')
         sessionStorage.setItem('tiempo', cronometro.toString())
         this.tiempo = cronometro
       }),
-      () => { },
-      () => {
-
-        this.resultado()
-
-
-        sessionStorage.setItem('bandera', '0')
-      }
-    )
+      () => {},
+      () => this.resultado())
 
   }
 
