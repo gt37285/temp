@@ -38,6 +38,7 @@ import { PreguntasGuard } from 'src/app/guards/preguntas.guard';
 import { ObjetivosRequerimentosComponent } from './gestion/cursos-prof/objetivos-requerimentos/objetivos-requerimentos.component';
 import { PasswordComponent } from './colecciones/password/password.component';
 import { SuperadminGuard } from 'src/app/guards/superadmin.guard';
+import { CalificacionesComponent } from './principal/modulos/calificaciones/calificaciones.component';
 
 const routes: Routes = [
 
@@ -97,6 +98,12 @@ const routes: Routes = [
   {
     path: "evaluaciones/registro/resultados/:id",
     component: ResultadoComponent,
+    canActivate: [EstGuard,CursosGuard],
+    data: { titulo: "Evaluacion", father: "Cursos" }
+  },
+  {
+    path: "calificaciones/:id",
+    component: CalificacionesComponent,
     canActivate: [EstGuard,CursosGuard],
     data: { titulo: "Evaluacion", father: "Cursos" }
   },

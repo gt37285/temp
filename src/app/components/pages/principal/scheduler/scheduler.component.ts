@@ -113,26 +113,29 @@ export class SchedulerComponent implements OnInit {
     this._service.cargarTareaPorUsuario(this._userService.user._id)
       .subscribe((data: any) => {
 
+        console.log(data);
 
         this.calendarEvents = data
-
+        
         for (let i = 0; i < data.length; i++) {
-
+          
           this.calendarEvents[i].id = data[i]._id
+          
 
           const adjunto = data[i].extendedProps.adjunto
 
           this.adjuntos = adjunto
-
+          
           for (const key in adjunto) {
-
-            if (adjunto[key]) {
+            
+            if (adjunto[key].success) {
               this.calendarEvents[i].textColor = '#06581f'
-            } else {
+            }
+            else {
               this.calendarEvents[i].textColor = '#c21a1afb'
             }
           }
-
+          
           this.calendarEvents[i].backgroundColor = '#d4d1d188'
           this.calendarEvents[i].borderColor = '#d4d1d188'
         }
@@ -145,13 +148,12 @@ export class SchedulerComponent implements OnInit {
 
     if (event.event.end < new Date()) {
       return Swal.fire({
-        title: 'Advertencia!',
+        title: 'Acceso negado',
         text: `La fecha limite expiro`,
         icon: 'warning'
       })
     }
-
-
+    
     this.evento = event.event
 
     this.render.addClass(modal, "show-modal");

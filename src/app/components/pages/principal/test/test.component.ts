@@ -57,6 +57,7 @@ export class TestComponent implements OnInit {
 
   resultado() {
 
+    sessionStorage.setItem('bandera','0')
     let respuestasform = this.form.value
     let preguntas = this.evaluaciones.preguntas
 
@@ -80,10 +81,13 @@ export class TestComponent implements OnInit {
     let data: any = {
       usuario: this.userService.user._id,
       puntaje: puntaje.toPrecision(3),
-      intentos: 1
+      intentos: 1,
+      rindio:true
     }
 
     let id_evaluacion = this.evaluaciones._id
+
+
 
     this.loading = true
     this.service.agregarEstudiante(data, id_evaluacion)
@@ -196,7 +200,7 @@ export class TestComponent implements OnInit {
 
         /**se completa el intervalo de tiempo */
 
-        if (horas == 0 && minutos == 0 && segundos == 0) {
+        if (horas == 0 && minutos == 0 && segundos == 0 || sessionStorage.getItem('bandera')) {
           Observer.complete()
         }
 

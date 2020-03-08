@@ -1,6 +1,6 @@
 <div class="container">
     <app-breadcrumbs></app-breadcrumbs>
-    <!-- <app-loading *ngIf="loading"></app-loading> -->
+    <app-loading *ngIf="loading"></app-loading>
 
     <section class="container-table">
 
@@ -134,35 +134,43 @@
             no hay registros
         </div>
 
-        <table class="table" *ngIf="tarea?.extendedProps?.adjunto.length > 0">
-            <thead>
-                <tr>
-                    <th>Estudiante</th>
-                    <th>Nombre</th>
-                    <th>Fecha sub.</th>
-                    <th>Fecha exp.</th>
-                    <th>Adjunto</th>
-                    <th>opciones</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let adjunto of tarea?.extendedProps?.adjunto">
-                <tr>
+        <form style="overflow-x: auto;" class="scrolltable" [formGroup]="formcal">
+            <table class="table" *ngIf="tarea?.extendedProps?.adjunto.length > 0">
+                <thead>
+                    <tr>
+                        <th>Estudiante</th>
+                        <th>Nombre</th>
+                        <th>Fecha sub.</th>
+                        <th>Archivo</th>
+                        <th>Calificacion</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let adjunto of tarea?.extendedProps?.adjunto;let i = index" formArrayName="notas">
+                    <tr>
+    
+                        <td><img [src]="adjunto.usuario.img | imagen" alt=""></td>
+                        <td>{{ adjunto?.usuario.nombre }} </td>
+                        <td>{{ adjunto?.fecha | date:'dd MMM yyyy -- HH:mm'}}</td>
+                        <td>{{ adjunto?.tema }}</td>
+    
+                        <td class="container-number" >
+                            <input type="number"  name="nota" min="1" max="10" [formControlName]="i" class="caja" required>
+                        </td>
+    
+                        <td>
+                            <a [href]="adjunto?.nombre | descarga:'tareas':tarea._id" class="videos"
+                                download="{{adjunto?.tema}}">
+                                <i class="fas fa-download icon "></i>
+                            </a>
 
-                    <td><img [src]="adjunto.usuario.img | imagen" alt=""></td>
-                    <td>{{ adjunto?.usuario.nombre }} </td>
-                    <td>{{ adjunto?.fecha | date:'dd MMM yyyy -- HH:mm'}}</td>
-                    <td>{{ tarea?.end | date:'dd MMM yyyy -- HH:mm'}}</td>
-                    <td>{{ adjunto?.tema }}</td>
+                            <i class="fas fa-archive icon icon-trash" (click)="calificacion(i,tarea,adjunto)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
 
-                    <td>
-                        <a [href]="adjunto?.nombre | descarga:'tareas':tarea._id" class="videos"
-                            download="{{adjunto?.tema}}">
-                            <i class="fas fa-download icon "></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
     </section>
 

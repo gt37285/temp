@@ -1,0 +1,53 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="container">
+    
+
+    <div class="container-exam">
+        <section class="head">
+            <div>
+                <h2 class="title">Reporte de Calificaciones</h2>
+                <p class="descripcion">este es el reporte de calificaciones</p>
+            </div>
+        </section>
+
+        <section class="body">
+            <div class="bienvenida">
+                <p class="desc">Estudiante: <strong>{{usuario | capitalizar}}</strong></p>
+            </div>
+
+            <div class="tareas"  *ngIf="tareas.length > 0">
+                <p class="title">Tareas</p>
+                <div *ngFor="let tarea of tareas" class="container-tareas">
+
+                    <div class="nombres">
+                        <p class="nombre">{{tarea.nombre | capitalizar}}</p>
+                        <p class="fecha">({{tarea.fecha | date}})</p>
+                    </div>
+                    <p class="puntaje" *ngIf="tarea.nota">{{tarea.nota | puntajes }}/10</p>
+                    <p class="puntaje" *ngIf="!tarea.nota">Sin calificacion</p>
+                </div>
+            </div>
+
+
+            <div class="tareas"  *ngIf="evaluaciones.length > 0">
+                <p class="title">Evaluaciones</p>
+                <div *ngFor="let evaluacion of evaluaciones"  class="container-tareas">
+
+                    <div class="nombres">
+                        <p class="nombre">{{evaluacion.nombre | capitalizar}}</p>
+                        <p class="fecha">({{evaluacion.fecha | date}})</p>
+                    </div>
+                    <p class="puntaje" *ngIf="evaluacion.rindio">{{evaluacion.nota | puntajes}}/10</p>
+                    <p class="puntaje" *ngIf="!evaluacion.rindio">No completado</p>
+                </div>
+            </div>
+
+            <div class="container-promedio"  *ngIf="promediototal > 0">
+                <p class="title">Promedio</p>
+                <p class="puntaje">{{promediototal | puntajes}}/10</p>
+            </div>
+           
+        </section>
+    </div>
+</div>

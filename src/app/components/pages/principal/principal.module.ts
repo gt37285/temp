@@ -23,6 +23,7 @@ import { TestComponent } from './test/test.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ResultadoComponent } from './test/resultado/resultado.component';
+import { CalificacionesComponent } from './modulos/calificaciones/calificaciones.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ResultadoComponent } from './test/resultado/resultado.component';
     CursodComponent,
     ModulosComponent,
     TestComponent,
-    ResultadoComponent
+    ResultadoComponent,
+    CalificacionesComponent
   ],
   imports: [
     FullCalendarModule,

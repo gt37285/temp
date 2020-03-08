@@ -11,6 +11,7 @@ export class ArchivoService {
 
   async subirArchivo(archivo: File, tipo: string, id: string, id_usuario?: string) {
 
+
     return new Promise((resolve, reject) => {
 
       /**se construye la url del backend */

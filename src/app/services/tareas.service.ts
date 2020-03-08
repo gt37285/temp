@@ -93,6 +93,20 @@ export class TareasService {
       )
   }
 
+  calificacion(calificaciones:any){
 
+    let url = `${URL_SERVICES}/aula/tareas/registros/calificaciones`
+
+    return this._http.put(url, calificaciones, { headers: this._userService.cargarHeaders() })
+      .pipe(
+        map((data: any) => data),
+        catchError((err) => {
+          return Swal.fire({
+            title: 'Error!',
+            text: err.error.message
+          })
+        })
+      )
+  }
 
 }

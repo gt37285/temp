@@ -10,10 +10,11 @@ import { ArchivosPipe } from './archivos.pipe';
 import { DescargaPipe } from './descarga.pipe';
 import { TelefonoPipe } from './telefono.pipe';
 import { FechadatetimePipe } from './fechadatetime.pipe';
+import { PuntajesPipe } from './puntajes.pipe';
 
 @NgModule({
-  declarations: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe, FechadatetimePipe],
+  declarations: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe, FechadatetimePipe, PuntajesPipe],
   imports: [],
-  exports: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe,FechadatetimePipe]
+  exports: [passwordPipe, ImagenPipe, CapitalizarPipe, NickPipe, DomSeguroPipe, ArchivosPipe, DescargaPipe, TelefonoPipe,FechadatetimePipe,PuntajesPipe]
 })
 export class PipesModule { }

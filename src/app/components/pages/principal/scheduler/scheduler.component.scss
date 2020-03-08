@@ -38,6 +38,9 @@ $fuente-nunito: "Nunito", sans-serif;
   z-index: 50;
   display: none;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .actividad {
     width: 450px;

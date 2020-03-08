@@ -4,7 +4,7 @@ import { cursoModel } from '../../../../models/cursos/cursos.model';
 import { tareasModel } from '../../../../models/clases/tareas.model';
 import { TareasService } from '../../../../services/tareas.service';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import { FormGroup,FormControl, Validators, NgForm, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-tareas',
@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class TareasComponent implements OnInit {
 
+  public loading:Boolean = false
   /**seccion modulo de adjuntos */
 
   public cursos: cursoModel[] = []
@@ -34,11 +35,18 @@ export class TareasComponent implements OnInit {
   public selectedCursoReg: string = ''
   public cursosReg: any = []
 
+  public formcal:FormGroup
+
   constructor(
     private _cursoService: CursosService,
     private _tareaService: TareasService,
     private _render: Renderer2
-  ) { }
+  ) {
+    this.formcal =  new FormGroup({
+      notas: new FormArray([])
+    })
+
+   }
 
   ngOnInit() {
     this.cargarCursos()
@@ -47,18 +55,30 @@ export class TareasComponent implements OnInit {
   }
 
   cargarCursos() {
+    this.loading = true
     this._cursoService.cargarCursoProfesor()
-      .subscribe((data: any) => this.cursos = data.curso)
+      .subscribe((data: any) => {
+        this.cursos = data.curso
+        this.loading = false
+      },()=> this.loading = false)
   }
 
   cargarCursosReg() {
+    this.loading = true
     this._cursoService.cargarCursoProfesor()
-      .subscribe((data: any) => this.cursosReg = data.curso)
+      .subscribe((data: any) => {
+        this.cursosReg = data.curso
+        this.loading = false
+      },()=>this.loading = false)
   }
 
   cargarCursosP() {
+    this.loading = true
     this._cursoService.cargarCursoProfesor()
-      .subscribe((data: any) => this.cursosP = data.curso)
+      .subscribe((data: any) => {
+        this.cursosP = data.curso
+        this.loading = false
+      },()=>this.loading = false)
   }
 
   cargarTareas() {
@@ -70,10 +90,14 @@ export class TareasComponent implements OnInit {
         icon: 'warning'
       })
     }
-
+    
+    this.loading = true
 
     this._tareaService.cargarTareaPorCurso(this.selectedCurso)
-      .subscribe(data => this.tareas = data)
+      .subscribe(data => {
+        this.tareas = data
+        this.loading = false
+      },()=> this.loading = false)
   }
 
   cargarTareasP() {
@@ -86,9 +110,12 @@ export class TareasComponent implements OnInit {
       })
     }
 
-
+    this.loading = true
     this._tareaService.cargarTareaPorCurso(this.selectedCursoP)
-      .subscribe(data => this.tareaP = data)
+      .subscribe(data => {
+        this.tareaP = data
+        this.loading = false
+      },()=>this.loading = false)
   }
 
   cargarAdjuntos() {
@@ -100,21 +127,35 @@ export class TareasComponent implements OnInit {
       })
     }
 
+    
+    this.loading = true
     this._tareaService.cargarTareaPorid(this.selectedTarea)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
+        (<FormArray> this.formcal.get('notas')).clear()
+
+        for (const item of data.tarea.extendedProps.adjunto) {
+          (<FormArray> this.formcal.get('notas')).push(new FormControl(item.nota))
+        }
+
         this.tarea = data.tarea
-      })
+        this.loading = false
+      },()=> this.loading = false)
   }
 
   editarTarea(tarea: any) {
 
+    this.loading = true
     this._tareaService.actualizarTarea(tarea)
-      .subscribe(data => Swal.fire({
-        title: 'Completado!',
-        text: data,
-        icon: 'success'
-      }))
+      .subscribe( (data:any) => {
+
+        Swal.fire({
+          title: 'Completado!',
+          text: data,
+          icon: 'success'
+        })
+        this.loading = false
+      }, ()=>this.loading =false )
   }
 
   eliminarTarea(tarea: any) {
@@ -131,6 +172,7 @@ export class TareasComponent implements OnInit {
     }).then(data => {
       if (data.value) {
 
+        this.loading = true
         this._tareaService.eliminarTarea(tarea._id)
           .subscribe(data => {
             Swal.fire({
@@ -139,7 +181,8 @@ export class TareasComponent implements OnInit {
               icon: 'success'
             })
             this.cargarTareasP()
-          })
+            this.loading = false
+          },()=>this.loading= false)
       }
     });
 
@@ -156,7 +199,7 @@ export class TareasComponent implements OnInit {
         confirmButtonText: "Cool"
       });
     }
-
+    this.loading = true
     this._tareaService.agregarTarea(form.value, this.selectedCursoReg)
       .subscribe(data => {
         this.cerrarModal(modal)
@@ -165,7 +208,8 @@ export class TareasComponent implements OnInit {
           text: data,
           icon: 'success'
         })
-      })
+        this.loading = false
+      },()=>this.loading = false)
   }
 
   cerrarModal(modal: any) {
@@ -174,5 +218,36 @@ export class TareasComponent implements OnInit {
 
   mostrarModal(modal: any) {
     this._render.addClass(modal, 'showModal')
+  }
+
+
+  calificacion(pos:number,tarea:any,adjunto:any){
+
+    if(<FormArray> this.formcal.get('notas')['controls'][pos].invalid){
+      return  Swal.fire({
+        title: 'Calificacion no archivada!',
+        text: 'Define una una calificacion',
+        icon: 'warning'
+      })
+    }
+
+    let calificaciones = {
+      nota: this.formcal.value.notas[pos],
+      tarea: tarea._id,
+      adjunto: adjunto._id
+    }
+
+    this.loading = true
+    this._tareaService.calificacion(calificaciones)
+      .subscribe(
+        (data:any) => {
+          Swal.fire({
+            title: 'Proceso Completado',
+            text: data.message,
+            icon: 'success'
+          })
+          this.loading = false
+        },()=>this.loading = false
+      )
   }
 }

@@ -53,13 +53,16 @@ export class CursodComponent implements OnInit {
   }
 
   verificarMatricula() {
+    this.loading = true
       this._service.verificarMatricula()
       .subscribe(
         (data => {
           this._service.matricula = data.estado
           this.matriculado = data.estado
-        })
-      )
+          this.loading = false
+        }),
+        ()=> this.loading = false)
+      
   }
 
   listarObjetivos(id_curso: string) {

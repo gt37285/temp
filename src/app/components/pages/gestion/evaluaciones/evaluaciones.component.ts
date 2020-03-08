@@ -178,6 +178,7 @@ export class EvaluacionesComponent implements OnInit {
     }
 
 
+
     this.loading = true
     this.service.agregar(evaluacion)
       .subscribe(

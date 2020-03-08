@@ -24,7 +24,6 @@ export class ResultadoComponent implements OnInit {
     public userService: UsuariosService
   ) {
     this.active_router.params.subscribe((data: any) => this.id = data.id)
-    sessionStorage.removeItem('bandera')
   }
 
   ngOnInit() {

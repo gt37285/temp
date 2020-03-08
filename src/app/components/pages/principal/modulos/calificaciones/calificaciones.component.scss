@@ -1,0 +1,123 @@
+$fuente-lato: "Lato", sans-serif;
+$fuente-raleway: "Raleway", sans-serif;
+$fuente-nunito: "Nunito", sans-serif;
+
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-exam{
+    width: 60%;
+    border: solid #c9c9c9ce 1px;
+    box-shadow: 1px 3px 5px #c9c9c98a;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.head,.body{
+    padding: 2em 7em;
+}
+
+.head{
+    background-color: #0078D7;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4em;
+
+    .title{
+        margin-top: 2em;
+        font-family: $fuente-nunito;
+        font-size: 27px;
+    }
+
+    .descripcion{
+        font-family: $fuente-raleway;
+        font-size: 14px;
+        margin-top: .5em;
+    }
+}
+
+.body{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    
+
+    strong{
+        font-family: $fuente-nunito;
+        font-size: 16px;
+    }
+
+    .bienvenida{
+        font-family: $fuente-raleway;
+        font-size: 17px;
+        margin: 5em 0 3em 0;
+    }
+
+    .tareas{
+        width: 100%;
+        margin-bottom: 2em;
+
+        .title{
+            font-family: $fuente-nunito;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 2em 0;
+        }
+
+        .container-tareas{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin: 1em 0;
+            padding-left: 1em;
+        }
+
+        .nombres *{
+            display: inline-block;
+            margin-right: 1em;
+        }
+
+        .nombre{
+            font-family: $fuente-raleway;
+            font-size: 17px;
+        }
+
+        .fecha,.puntaje{
+            font-family: $fuente-raleway;
+            font-size: 15px;
+        }
+
+        .puntaje{
+            font-weight: bold;
+        }
+    }
+
+    .container-promedio{
+        width: 100%;
+        margin: 2em 0 ;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title{
+            font-family: $fuente-nunito;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .puntaje{
+            font-family: $fuente-raleway;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+
+}

@@ -90,9 +90,14 @@ export class ModulosComponent implements OnInit {
     this.evaluacionService.verificarEstudiante(evaluacion_id)
     .subscribe((data:any) => {
       sessionStorage.setItem('izx', data.intentos)
+      sessionStorage.removeItem('bandera')
       this.router.navigate(['/aula/evaluaciones/',evaluacion_id])
     })
 
+  }
+
+  calificaciones(id_curso:String){
+    this.router.navigate(['/aula/calificaciones',id_curso])
   }
 
 
