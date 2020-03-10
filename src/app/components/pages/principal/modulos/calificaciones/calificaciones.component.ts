@@ -13,7 +13,7 @@ import { evaluacionModel } from 'src/app/models/cursos/evaluacion.model';
 export class CalificacionesComponent implements OnInit {
 
 
-  public usuario:String = ''
+  public usuario:string = ''
   public loading:Boolean = false
   public id_curso:String = ''
   public tareas:tareasModel[] = []
