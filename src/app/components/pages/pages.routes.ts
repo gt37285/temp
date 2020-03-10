@@ -181,7 +181,8 @@ const routes: Routes = [
   {
     path: "prof/evaluaciones/formulario/:id",
     component: FormularioComponent,
-    canActivate: [ProfGuard,PreguntasGuard],
+    //agregar guard de preguntas
+    canActivate: [ProfGuard],
     data: { titulo: "Evaluaciones", father: "Gestion" }
   },
   {

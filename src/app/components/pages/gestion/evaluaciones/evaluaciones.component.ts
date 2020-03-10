@@ -204,9 +204,11 @@ export class EvaluacionesComponent implements OnInit {
 
   crearPreguntasEvaluacion(evaluacion:evaluacionModel){
 
-    if(evaluacion.fecha_f.toString() <= new Date().toISOString()){
-      sessionStorage.setItem("izv","0")
-    }
+    // console.log(evaluacion);
+
+    // if(evaluacion.fecha_f.toString() <= new Date().toISOString()){
+    //   sessionStorage.setItem("izv","0")
+    // }
 
     this.router.navigate(['/aula/prof/evaluaciones/formulario/',evaluacion._id])
 

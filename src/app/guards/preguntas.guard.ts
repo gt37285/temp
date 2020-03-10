@@ -29,7 +29,7 @@ export class PreguntasGuard implements CanActivate {
 
     sessionStorage.removeItem('izv')
 
-    return permiso;
+    return true;
   }
   
 }

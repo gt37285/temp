@@ -27,6 +27,7 @@ export class EvaluacionesGuard implements CanActivate {
       this.router.navigate(['/aula/evaluaciones/registro/resultados',evaluacion])
     }
 
+
     return permiso;
   }
   
